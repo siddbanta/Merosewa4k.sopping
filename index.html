@@ -6,24 +6,24 @@
     <title>ATOZ Stores - Premium Mobile Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- AD SCRIPT (IMPROVEMENT: 'defer' attribute added to prevent render blocking) -->
+    <script defer type='text/javascript' src='//pl26800849.profitableratecpm.com/07/ad/54/07ad546033524ef85683d26050720d0b.js'></script>
+    
     <style>
+        /* --- 1. GLOBAL STYLES & VARIABLES --- */
         :root {
-            --primary-color: #0071e3;
-            --success-color: #2ecc71;
-            --error-color: #e74c3c;
-            --bg-color: #f5f5f7;
-            --card-bg: #ffffff;
-            --text-color: #1d1d1f;
-            --text-muted: #6e6e73;
-            --border-color: #d2d2d7;
-            --shadow-color: rgba(0, 0, 0, 0.05);
+            --primary-color: #0071e3; --success-color: #2ecc71; --error-color: #e74c3c;
+            --bg-color: #f5f5f7; --card-bg: #ffffff; --text-color: #1d1d1f;
+            --text-muted: #6e6e73; --border-color: #d2d2d7; --shadow-color: rgba(0, 0, 0, 0.05);
             --gradient: linear-gradient(45deg, var(--primary-color), #00A6FF);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex-grow: 1; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         
-        /* HEADER & NAV */
+        /* --- 2. HEADER & NAVIGATION --- */
         .header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 15px 0; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
         .navbar { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.8rem; font-weight: 800; color: var(--text-color); text-decoration: none; }
@@ -38,14 +38,15 @@
         .dropdown-item:hover { background-color: var(--bg-color); }
         .dropdown-item i { margin-right: 12px; font-size: 1.1rem; }
         
-        /* VIEWS & LAYOUT */
+        /* --- 3. VIEWS & ANIMATIONS --- */
         .view { display: none; padding: 60px 0; }
-        .view.active { display: block; animation: fadeInView 0.5s ease-out; }
-        @keyframes fadeInView { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUpFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .view.active { display: block; animation: slideUpFadeIn 0.5s ease-out; }
+        .content-fade-in { animation: slideUpFadeIn 0.4s ease-out; }
         @keyframes fadeInDropdown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .view-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 40px; }
 
-        /* HERO & BUTTONS */
+        /* --- 4. COMPONENTS (Buttons, Forms, Cards) --- */
         .hero { text-align: center; padding: 80px 20px; background-color: var(--card-bg); border-radius: 20px; margin-bottom: 60px; }
         .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 15px; }
         .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 30px auto; }
@@ -54,14 +55,16 @@
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 113, 227, 0.3); }
         .btn-secondary { background: #e9ecef; color: var(--text-color); }
         .btn-secondary:hover { background: #dee2e6; }
-        .btn:disabled { background: #ced4da; color: #6c757d; cursor: not-allowed; transform: none; box-shadow: none; }
+        .btn-danger { background: var(--error-color); color: white; }
+        .btn-danger:hover { background: #c0392b; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); }
+        .btn:disabled { background: #ced4da; color: #6c757d; cursor: not-allowed; transform: none; box-shadow: none; opacity: 0.7; }
         
-        /* FORMS & PRODUCTS */
         .form-input { width: 100%; padding: 14px; border: 1px solid var(--border-color); border-radius: 10px; font-family: 'Poppins', sans-serif; transition: all 0.2s ease; font-size: 1rem; }
         .form-input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2); }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-muted); }
         #product-search-input { width: 100%; max-width: 500px; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border-color); font-size: 1rem; }
+        
         #product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .product-card { background: var(--card-bg); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px var(--shadow-color); display: flex; flex-direction: column; transition: all 0.3s ease; }
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); }
@@ -73,7 +76,7 @@
         .product-price { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; }
         .product-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         
-        /* CART & ORDERS */
+        /* --- 5. PAGE-SPECIFIC STYLES (Cart, Orders, Refer) --- */
         .cart-layout { display: grid; grid-template-columns: 2.5fr 1.5fr; gap: 40px; align-items: flex-start; }
         .cart-items-container { background: var(--card-bg); padding: 10px 30px; border-radius: 20px; }
         .cart-item { display: flex; gap: 20px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border-color); }
@@ -85,17 +88,55 @@
         .cart-summary { background: var(--card-bg); padding: 30px; border-radius: 20px; position: sticky; top: 110px; }
         #cart-empty-state, #order-history-empty-state { text-align: center; padding: 80px 20px; }
         #cart-empty-state i, #order-history-empty-state i { font-size: 6rem; color: var(--border-color); }
+        
         .order-history-card { background: var(--card-bg); border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 8px 30px var(--shadow-color); }
         .order-history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
         .order-status { padding: 5px 12px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; text-transform: capitalize; }
         .order-status.pending { background-color: #fff0c2; color: #7d5100; }
         .order-status.shipped { background-color: #d4edda; color: #155724; }
+        .order-status.completed { background-color: #cce5ff; color: #004085; }
+        .order-status.cancelled { background-color: #f8d7da; color: #721c24; }
         .order-item-list { border-top: 1px solid var(--border-color); margin-top: 15px; padding-top: 15px; }
         .order-item { display: flex; gap: 15px; align-items: center; margin-bottom: 10px; }
         .order-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
 
-        /* MODALS & CONFIRMATION */
+        .refer-container { background: var(--card-bg); padding: 30px; border-radius: 20px; box-shadow: 0 8px 30px var(--shadow-color); max-width: 800px; margin: 0 auto; min-height: 400px; }
+        .refer-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; }
+        .refer-tab-btn { background: none; border: none; padding: 12px 20px; font-size: 1rem; font-weight: 500; cursor: pointer; color: var(--text-muted); position: relative; transition: color 0.3s; }
+        .refer-tab-btn::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background-color: var(--primary-color); transform: scaleX(0); transition: transform 0.3s ease; }
+        .refer-tab-btn.active { color: var(--primary-color); font-weight: 600; }
+        .refer-tab-btn.active::after { transform: scaleX(1); }
+        .refer-tab-pane { display: none; }
+        .refer-tab-pane.active { display: block; animation: slideUpFadeIn 0.4s ease-out; }
+        .earnings-display { text-align: center; margin-bottom: 30px; padding: 25px; background: var(--gradient); color: white; border-radius: 12px; }
+        .earnings-display p { font-size: 1.1rem; opacity: 0.9; }
+        .earnings-display h3 { font-size: 3rem; font-weight: 700; margin: 5px 0; border: none; padding-bottom: 0; display: inline; }
+        .referral-code-box { background: var(--bg-color); border: 2px dashed var(--border-color); padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; cursor: pointer; transition: background-color 0.2s; }
+        .referral-code-box:hover { background-color: #e9ecef; }
+        .referral-code-box p { margin-bottom: 10px; font-weight: 500; }
+        .referral-code-box .code { font-size: 1.8rem; font-weight: 700; letter-spacing: 4px; color: var(--text-color); }
+        .shareable-product-item { display: flex; align-items: center; gap: 20px; padding: 15px; background-color: var(--bg-color); border-radius: 12px; margin-bottom: 15px; }
+        .shareable-product-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+        .shareable-product-info { flex-grow: 1; }
+        .shareable-product-info h4 { margin: 0 0 5px 0; font-size: 1.1rem; }
+        .potential-earning { font-size: 0.9rem; color: var(--success-color); font-weight: 500; }
+        .btn-share { padding: 8px 15px; font-size: 0.9rem; }
+        .earnings-history-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .earnings-history-table th, .earnings-history-table td { text-align: left; padding: 12px; border-bottom: 1px solid var(--border-color); }
+        .earnings-history-table th { background-color: var(--bg-color); font-weight: 600; }
+        
+        #youtube-promo-section { background-color: var(--card-bg); padding: 40px; border-radius: 20px; margin-bottom: 60px; }
+        .channels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 20px; }
+        .channel-card { background-color: var(--bg-color); border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 4px 15px var(--shadow-color); transition: all 0.3s ease; text-decoration: none; color: var(--text-color); display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
+        .channel-card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-color: var(--primary-color); }
+        .channel-card i { font-size: 3.5rem; margin-bottom: 15px; color: #ff0000; }
+        .channel-card h4 { margin: 0 0 5px 0; font-size: 1.2rem; font-weight: 600; }
+        .channel-card p { font-weight: 500; color: var(--primary-color); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s ease; }
+        .channel-card:hover p { opacity: 1; }
+
+        /* --- 6. MODAL & OVERLAYS --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1050; display: none; justify-content: center; align-items: center; padding: 20px; }
+        @keyframes fadeInView { from { opacity: 0; } to { opacity: 1; } }
         .modal-overlay.active { display: flex; animation: fadeInView 0.3s; }
         .modal-content { background: var(--card-bg); padding: 30px; border-radius: 15px; width: 100%; max-width: 500px; position: relative; }
         .close-modal-btn { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; background: none; border: none; color: var(--text-muted); }
@@ -114,7 +155,7 @@
         @keyframes scale-in { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         @keyframes draw-check { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
         
-        /* NEW: Enchantment Styles */
+        /* --- 7. UTILITIES (Spinner, Toast) --- */
         .loading-spinner { border: 4px solid #f3f3f3; border-radius: 50%; border-top: 4px solid var(--primary-color); width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 40px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 2000; }
@@ -124,11 +165,16 @@
         @keyframes slideIn { to { transform: translateX(0); } }
         @keyframes slideOut { to { transform: translateX(120%); } }
 
-        /* RESPONSIVE */
+        /* --- 8. FOOTER --- */
+        .footer { text-align: center; padding: 40px 20px; margin-top: 30px; border-top: 1px solid var(--border-color); color: var(--text-muted); }
+        .footer a { color: var(--primary-color); text-decoration: none; font-weight: 500; }
+        .footer a:hover { text-decoration: underline; }
+
+        /* --- 9. RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 992px) { .cart-layout { grid-template-columns: 1fr; } .cart-summary { position: static; margin-top: 30px; } }
         @media (max-width: 768px) {
             .view { padding: 40px 0; } .view-title { font-size: 2rem; } .hero h1 { font-size: 2.5rem; }
-            #product-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+            #product-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             .product-info { padding: 15px; } .product-buttons { grid-template-columns: 1fr; }
         }
     </style>
@@ -150,26 +196,45 @@
     </header>
 
     <main class="container">
+        <!-- Home View -->
         <section id="home-view" class="view active">
-            <div class="hero"><h1>The Best Place for Your Next Phone.</h1><p>Unbeatable prices, top-tier devices, and a seamless shopping experience.</p><a href="#products-section" class="btn btn-primary">Explore Products</a></div>
-            <div id="products-section">
+            <div class="hero"><h1>The Best Place for Your Next Phone.</h1><p>Unbeatable prices, top-tier devices, and a seamless shopping experience.</p><a href="#products-section" id="explore-products-btn" class="btn btn-primary">Explore Products</a></div>
+            <div id="youtube-promo-section">
+                <h2 class="view-title">Our Channels</h2>
+                <div id="youtube-channels-grid" class="channels-grid"><div class="loading-spinner"></div></div>
+            </div>
+            <div id="products-section" style="padding-top: 60px;">
                 <h2 class="view-title">Our Collection</h2>
                 <div style="margin-bottom: 40px; display:flex; justify-content:center;"><input type="search" id="product-search-input" placeholder="Search for phones..."></div>
                 <div id="product-grid"><div class="loading-spinner"></div></div>
             </div>
         </section>
         
+        <!-- Cart View -->
         <section id="cart-view" class="view"><h2 class="view-title">Your Shopping Cart</h2><div id="cart-content-area"></div></section>
         
+        <!-- Order History View -->
         <section id="order-history-view" class="view">
             <h2 class="view-title">My Orders</h2>
-            <div id="order-history-list"></div>
+            <div id="order-history-list"><div class="loading-spinner"></div></div>
+        </section>
+        
+        <!-- Refer & Earn View -->
+        <section id="refer-view" class="view">
+            <h2 class="view-title">Refer & Earn Program</h2>
+            <div id="refer-content-wrapper" class="refer-container"><div class="loading-spinner"></div></div>
         </section>
     </main>
+    
+    <footer class="footer">
+        <p>© 2024 ATOZ Mobile Stores. All Rights Reserved.</p>
+        <p><a href="#" id="refund-policy-link">Refund Policy</a> | <a href="#" id="terms-link">Terms of Service</a></p>
+    </footer>
 
+    <!-- MODALS SECTION -->
     <div class="modal-overlay" id="main-modal">
         <div class="modal-content" id="modal-content-area">
-            <!-- Auth Forms -->
+            <!-- Auth Forms Section -->
             <div id="auth-modal-content" class="modal-section">
                 <button class="close-modal-btn">×</button>
                 <div id="login-form-container">
@@ -179,7 +244,9 @@
                 </div>
                 <div id="signup-form-container" style="display:none;">
                     <h3 class="view-title" style="font-size:1.8rem;">Create Account</h3>
-                    <form id="signup-form"><div class="form-group"><label>Full Name</label><input type="text" name="name" class="form-input" required></div><div class="form-group"><label>Email</label><input type="email" name="email" class="form-input" required></div><div class="form-group"><label>Password</label><input type="password" name="password" class="form-input" required></div><button type="submit" class="btn btn-primary" style="width:100%;">Sign Up</button></form>
+                    <form id="signup-form"><div class="form-group"><label>Full Name</label><input type="text" name="name" class="form-input" required></div><div class="form-group"><label>Email</label><input type="email" name="email" class="form-input" required></div><div class="form-group"><label>Password</label><input type="password" name="password" class="form-input" required></div>
+                    <div class="form-group"><label>Referral Code (Optional)</label><input type="text" name="referralCode" class="form-input"></div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Sign Up</button></form>
                     <p style="text-align:center; margin-top:20px;">Already have an account? <a href="#" class="show-login-link auth-link">Login</a></p>
                 </div>
                 <div id="forgot-password-container" style="display:none;">
@@ -189,7 +256,7 @@
                 </div>
             </div>
 
-            <!-- Order Form -->
+            <!-- Order Form Section -->
             <div id="order-modal-content" class="modal-section">
                 <button class="close-modal-btn">×</button>
                 <form id="order-form">
@@ -216,7 +283,7 @@
                 </form>
             </div>
 
-            <!-- Confirmation Animation -->
+            <!-- Confirmation Animation Section -->
             <div id="confirmation-modal-content" class="modal-section">
                 <div id="order-confirmation-container"><div class="checkmark-circle"><svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><path class="checkmark-path" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg></div><h2 style="margin-top:25px;">Order Confirmed!</h2><p style="color:var(--text-muted);">Your order has been placed successfully.</p></div>
             </div>
@@ -224,30 +291,44 @@
     </div>
 
     <script type="module">
-        // --- 1. FIREBASE SETUP (USING REALTIME DATABASE) ---
+        // --- 1. FIREBASE SETUP ---
+        // =========================================================================================================
+        // !!! SECURITY WARNING !!!
+        // Aapne API keys ko seedhe public HTML file mein rakha hai. Yeh testing ke liye theek hai, 
+        // lekin live website ke liye aacha nahi hai. Koi bhi in keys ka galat istemal kar sakta hai,
+        // jisse aapka Firebase account suspend ho sakta hai ya aako unexpected bill aa sakta hai.
+        // Live project ke liye, environment variables ya server-side functions ka istemal karein.
+        // =========================================================================================================
         const firebaseConfig = {
-            apiKey: "AIzaSyBJVsgK-5lfNORLjPDf1k98z-DfzVy-BkQ",
+            apiKey: "AIzaSyBJVsgK-5lfNORLjPDf1k98z-DfzVy-BkQ", // Aapki key yahan
             authDomain: "r-commerce-31882.firebaseapp.com",
             databaseURL: "https://r-commerce-31882-default-rtdb.firebaseio.com",
             projectId: "r-commerce-31882",
             storageBucket: "r-commerce-31882.appspot.com",
             messagingSenderId: "933291900578",
             appId: "1:933291900578:web:73abc587657ef9a495a1fb",
-            measurementId: "G-HQ61F0YPLH"
         };
         
-        // --- FIX: Using Realtime Database SDK instead of Firestore ---
         const { initializeApp } = await import("https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js");
         const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } = await import("https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js");
-        const { getDatabase, ref, onValue, set, push, serverTimestamp, get, query, orderByChild, equalTo } = await import("https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js");
+        const { getDatabase, ref, set, push, serverTimestamp, get, query, orderByChild, equalTo, update } = await import("https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js");
         
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getDatabase(app); // --- FIX: Using getDatabase() ---
+        const db = getDatabase(app);
         
         // --- 2. GLOBAL STATE & CONFIG ---
-        let allProducts = [], cart = [], currentUser = null, isAdmin = false;
+        let allProducts = [];
+        let cart = [];
+        let currentUser = null;
+        let currentUserData = null;
         let currentOrderItems = []; 
+        
+        const SIGNUP_REFERRAL_BONUS = 5;
+        const PURCHASE_COMMISSION_RATE = 0.05; // 5%
+        const MIN_WITHDRAWAL_AMOUNT = 1000;
+        const REFERRAL_LEAVE_WAIT_DAYS = 30; // 1 month approx.
+        const ADMIN_UIDS = ['IchlEMXcd6QOhOxcyusqlYSqMh42', '0i05Vq5GqycBjZ9ROlhpJUhyY7i2'];
         
         const qrCodeImages = {
             Esewa: 'https://iili.io/FBwORWl.jpg',
@@ -256,12 +337,8 @@
         };
 
         // --- 3. UI & DOM MANIPULATION ---
-        const showView = (viewId) => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById(viewId)?.classList.add('active'); window.scrollTo(0,0); };
-        const openModal = (modalType) => {
-            document.querySelectorAll('.modal-section').forEach(s => s.style.display = 'none');
-            document.getElementById(`${modalType}-modal-content`).style.display = 'block';
-            document.getElementById('main-modal').classList.add('active');
-        };
+        const showView = (viewId) => { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); const view = document.getElementById(viewId); if(view) view.classList.add('active'); window.scrollTo(0,0); };
+        const openModal = (modalType) => { document.querySelectorAll('.modal-section').forEach(s => s.style.display = 'none'); const modal = document.getElementById(`${modalType}-modal-content`); if (modal) { modal.style.display = 'block'; document.getElementById('main-modal').classList.add('active'); } };
         const closeModal = () => { document.getElementById('main-modal').classList.remove('active'); };
         
         const showToast = (message, type = 'info') => {
@@ -273,21 +350,27 @@
             if (type === 'error') icon = 'bxs-x-circle';
             toast.innerHTML = `<i class='bx ${icon}'></i> ${message}`;
             container.appendChild(toast);
+            
+            // BUG FIX & IMPROVEMENT: Toast remove hone ka logic theek kiya gaya.
             setTimeout(() => {
                 toast.style.animation = 'slideOut 0.3s forwards';
-                setTimeout(() => toast.remove(), 300);
+                setTimeout(() => toast.remove(), 300); // Animation ke baad remove hoga.
             }, 3000);
         };
-
+        
         const renderProducts = (productsToRender) => {
             const grid = document.getElementById('product-grid');
+            if (!grid) return;
             if (productsToRender.length === 0) {
-                grid.innerHTML = `<p style="text-align:center;">No products found.</p>`;
+                grid.innerHTML = `<p style="text-align:center; grid-column: 1 / -1;">No products found.</p>`;
                 return;
             }
+            // PERFORMANCE IMPROVEMENT: Images mein `loading="lazy"` add kiya gaya hai.
             grid.innerHTML = productsToRender.map(product => `
                 <div class="product-card">
-                    <div class="product-card-image"><img src="${product.imageUrl}" alt="${product.name}"></div>
+                    <div class="product-card-image">
+                        <img src="${product.imageUrl}" alt="${product.name}" loading="lazy">
+                    </div>
                     <div class="product-info">
                         <h3>${product.name}</h3>
                         <div class="product-price">₹${product.price.toLocaleString('en-IN')}</div>
@@ -296,202 +379,262 @@
                             <button class="btn btn-primary add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
                         </div>
                     </div>
-                </div>
-            `).join('');
-        };
-        
-        const renderCartPage = () => {
-            const cartArea = document.getElementById('cart-content-area');
-            if (cart.length === 0) {
-                cartArea.innerHTML = `<div id="cart-empty-state"><i class='bx bxs-cart-alt'></i><h3 style="margin-top: 20px;">Your Cart is Empty</h3><p style="margin-bottom: 30px;">Looks like you haven't added anything yet.</p><button class="btn btn-primary" onclick="document.getElementById('logo-link').click()">Continue Shopping</button></div>`;
-                return;
-            }
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = 50; 
-            const total = subtotal + shipping;
-            cartArea.innerHTML = `<div class="cart-layout"><div class="cart-items-container">${cart.map(item => `<div class="cart-item"><img src="${item.imageUrl}" alt="${item.name}"><div class="cart-item-details"><h4>${item.name}</h4><p style="font-weight:600; color:var(--primary-color);">₹${item.price.toLocaleString('en-IN')}</p><div class="quantity-controls"><button class="quantity-btn" data-id="${item.id}" data-change="-1">-</button><span>${item.quantity}</span><button class="quantity-btn" data-id="${item.id}" data-change="1">+</button></div></div><button class="remove-from-cart-btn" data-id="${item.id}" style="background:none; border:none; font-size:1.5rem; color:var(--text-muted); cursor:pointer;"><i class='bx bx-trash'></i></button></div>`).join('')}</div><div class="cart-summary"><h3>Order Summary</h3><div style="display:flex; justify-content:space-between; margin:20px 0;"><span>Subtotal</span> <strong>₹${subtotal.toLocaleString('en-IN')}</strong></div><div style="display:flex; justify-content:space-between; margin-bottom:20px;"><span>Shipping</span> <strong>₹${shipping.toLocaleString('en-IN')}</strong></div><hr style="border:none; border-top:1px solid var(--border-color); margin-bottom:20px;"><div style="display:flex; justify-content:space-between; font-size:1.3rem; font-weight:700;"><span>Total</span> <span>₹${total.toLocaleString('en-IN')}</span></div><button class="btn btn-primary" id="checkout-from-cart-btn" style="width:100%; margin-top:30px;">Proceed to Checkout</button></div></div>`;
+                </div>`).join('');
         };
 
-        const renderOrderHistory = async () => {
-            const listContainer = document.getElementById('order-history-list');
-            if (!currentUser) { showToast("Please log in to see your orders.", "error"); return; }
-            listContainer.innerHTML = `<div class="loading-spinner"></div>`;
+        const renderCartPage = () => { const cartArea = document.getElementById('cart-content-area'); if (!cartArea) return; if (cart.length === 0) { cartArea.innerHTML = `<div id="cart-empty-state"><i class='bx bxs-cart-alt'></i><h3 style="margin-top: 20px;">Your Cart is Empty</h3><p style="margin-bottom: 30px;">Looks like you haven't added anything yet.</p><button class="btn btn-primary" id="cart-continue-shopping">Continue Shopping</button></div>`; return; } const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); const shipping = 50; const total = subtotal + shipping; cartArea.innerHTML = `<div class="cart-layout"><div class="cart-items-container">${cart.map(item => `<div class="cart-item"><img src="${item.imageUrl}" alt="${item.name}"><div class="cart-item-details"><h4>${item.name}</h4><p style="font-weight:600; color:var(--primary-color);">₹${item.price.toLocaleString('en-IN')}</p><div class="quantity-controls"><button class="quantity-btn" data-id="${item.id}" data-change="-1">-</button><span>${item.quantity}</span><button class="quantity-btn" data-id="${item.id}" data-change="1">+</button></div></div><button class="remove-from-cart-btn" data-id="${item.id}" style="background:none; border:none; font-size:1.5rem; color:var(--text-muted); cursor:pointer;"><i class='bx bx-trash'></i></button></div>`).join('')}</div><div class="cart-summary"><h3>Order Summary</h3><div style="display:flex; justify-content:space-between; margin:20px 0;"><span>Subtotal</span> <strong>₹${subtotal.toLocaleString('en-IN')}</strong></div><div style="display:flex; justify-content:space-between; margin-bottom:20px;"><span>Shipping</span> <strong>₹${shipping.toLocaleString('en-IN')}</strong></div><hr style="border:none; border-top:1px solid var(--border-color); margin-bottom:20px;"><div style="display:flex; justify-content:space-between; font-size:1.3rem; font-weight:700;"><span>Total</span> <span>₹${total.toLocaleString('en-IN')}</span></div><button class="btn btn-primary" id="checkout-from-cart-btn" style="width:100%; margin-top:30px;">Proceed to Checkout</button></div></div>`; };
+        const renderOrderHistory = async () => { const listContainer = document.getElementById('order-history-list'); if (!currentUser) { showToast("Please log in to see your orders.", "error"); return; } listContainer.innerHTML = `<div class="loading-spinner"></div>`; try { const ordersQuery = query(ref(db, 'orders'), orderByChild('userId'), equalTo(currentUser.uid)); const snapshot = await get(ordersQuery); if (!snapshot.exists()) { listContainer.innerHTML = `<div id="order-history-empty-state"><i class='bx bx-receipt'></i><h3 style="margin-top: 20px;">No Orders Yet</h3><p style="margin-bottom: 30px;">You haven't placed any orders with us.</p><button class="btn btn-primary" id="history-start-shopping">Start Shopping</button></div>`; return; } const ordersData = snapshot.val(); const ordersArray = Object.keys(ordersData).map(key => ({ id: key, ...ordersData[key] })).sort((a, b) => b.createdAt - a.createdAt); listContainer.innerHTML = ordersArray.map(order => `<div class="order-history-card"><div class="order-history-header"><div><strong>Order ID:</strong> #${order.id.slice(-6).toUpperCase()}<br><strong>Date:</strong> ${new Date(order.createdAt).toLocaleDateString()}</div><span class="order-status ${order.status}">${order.status}</span></div><div class="order-item-list">${order.items.map(item => `<div class="order-item"><img src="${item.imageUrl}" alt="${item.name}"><div><strong>${item.name}</strong> (x${item.quantity})<br><span style="color:var(--text-muted);">₹${item.price.toLocaleString('en-IN')}</span></div></div>`).join('')}</div><div style="text-align:right; font-weight:700; font-size:1.1rem; margin-top:15px; border-top:1px solid var(--border-color); padding-top:10px;">Total: ₹${order.totalAmount.toLocaleString('en-IN')}</div></div>`).join(''); } catch (err) { console.error("Error fetching orders: ", err); listContainer.innerHTML = `<p style="color:var(--error-color); text-align:center;">Could not load your orders. Please try again later.</p>`; showToast("Could not load orders.", "error"); } };
+        
+        // --- 4. REFER & EARN LOGIC ---
+        const showReferralView = async () => {
+            if (!currentUser) { openModal('auth'); return; }
+            showView('refer-view');
+            const contentWrapper = document.getElementById('refer-content-wrapper');
+            contentWrapper.innerHTML = `<div class="loading-spinner"></div>`;
 
             try {
-                // --- FIX: Querying Realtime Database for orders ---
-                const ordersQuery = query(ref(db, 'orders'), orderByChild('userId'), equalTo(currentUser.uid));
-                const snapshot = await get(ordersQuery);
-
-                if (!snapshot.exists()) {
-                    listContainer.innerHTML = `<div id="order-history-empty-state"><i class='bx bx-receipt'></i><h3 style="margin-top: 20px;">No Orders Yet</h3><p style="margin-bottom: 30px;">You haven't placed any orders with us.</p><button class="btn btn-primary" onclick="document.getElementById('logo-link').click()">Start Shopping</button></div>`;
+                const userSnapshot = await get(ref(db, `users/${currentUser.uid}`));
+                if(userSnapshot.exists()) { currentUserData = userSnapshot.val(); }
+                
+                if (!currentUserData) {
+                    contentWrapper.innerHTML = `<p style="text-align:center; color: var(--text-muted)">Could not find user data. Please try again.</p>`;
                     return;
                 }
-                const ordersData = snapshot.val();
-                const ordersArray = Object.keys(ordersData).map(key => ({ id: key, ...ordersData[key] })).reverse();
-                
-                listContainer.innerHTML = ordersArray.map(order => {
-                    const orderDate = order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'N/A'; // --- FIX: Handling RTDB timestamp ---
-                    return `<div class="order-history-card"><div class="order-history-header"><div><strong>Order ID:</strong> #${order.id.slice(-6).toUpperCase()}<br><strong>Date:</strong> ${orderDate}</div><span class="order-status ${order.status}">${order.status}</span></div><div class="order-item-list">${order.items.map(item => `<div class="order-item"><img src="${item.imageUrl}" alt="${item.name}"><div><strong>${item.name}</strong> (x${item.quantity})<br><span style="color:var(--text-muted);">₹${item.price.toLocaleString('en-IN')}</span></div></div>`).join('')}</div><div style="text-align:right; font-weight:700; font-size:1.1rem; margin-top:15px; border-top:1px solid var(--border-color); padding-top:10px;">Total: ₹${order.totalAmount.toLocaleString('en-IN')}</div></div>`;
-                }).join('');
-            } catch (err) {
-                console.error("Error fetching orders: ", err);
-                listContainer.innerHTML = '';
-                showToast("Could not load orders. A database index might be missing.", "error");
-            }
+
+                if (currentUserData.leftReferralProgramAt) {
+                    const leftAt = new Date(currentUserData.leftReferralProgramAt);
+                    const now = new Date();
+                    const daysSinceLeft = (now - leftAt) / (1000 * 60 * 60 * 24);
+
+                    if (daysSinceLeft < REFERRAL_LEAVE_WAIT_DAYS) {
+                        const canRejoinDate = new Date(leftAt.setDate(leftAt.getDate() + REFERRAL_LEAVE_WAIT_DAYS));
+                        contentWrapper.innerHTML = `
+                            <div class="content-fade-in" style="text-align: center;">
+                                <h3 style="margin-bottom:15px;">You Have Left the Program</h3>
+                                <p style="color: var(--text-muted); margin-bottom: 25px;">You can rejoin the referral program after <b>${canRejoinDate.toLocaleDateString()}</b>.</p>
+                                <i class='bx bx-time-five' style="font-size: 5rem; color: var(--border-color);"></i>
+                            </div>`;
+                        return;
+                    }
+                }
+
+                const hasJoinedProgram = currentUserData.withdrawalDetailsComplete === true;
+                if (hasJoinedProgram) {
+                    const earnings = currentUserData.earnings?.balance || 0;
+                    const history = currentUserData.earnings?.history ? Object.values(currentUserData.earnings.history).sort((a,b) => b.timestamp - a.timestamp) : [];
+                    const details = currentUserData.withdrawalDetails || {};
+                    
+                    contentWrapper.innerHTML = `
+                        <div class="refer-tabs">
+                            <button class="refer-tab-btn active" data-tab="dashboard">Dashboard</button>
+                            <button class="refer-tab-btn" data-tab="share">Share & Earn</button>
+                            <button class="refer-tab-btn" data-tab="withdraw">Withdraw</button>
+                            <button class="refer-tab-btn" data-tab="history">History</button>
+                            <button class="refer-tab-btn" data-tab="profile">Profile</button>
+                        </div>
+                        <div class="refer-tab-content">
+                            <div id="refer-tab-dashboard" class="refer-tab-pane active">
+                                <div class="earnings-display"><p>Your Current Earnings Balance</p><h3>₹${earnings.toLocaleString('en-IN')}</h3></div>
+                                <div class="referral-code-box" id="copy-code-box"><p>Your Unique Referral Code (Click to Copy)</p><span class="code">${currentUserData.referralCode}</span></div>
+                            </div>
+                            <div id="refer-tab-share" class="refer-tab-pane">
+                                <h3>Share Products & Earn 5% Commission</h3>
+                                <p style="color: var(--text-muted); margin-bottom: 20px;">When a user signs up with your link and completes a purchase, you'll earn <b>5%</b> of the order total! You also get <b>₹${SIGNUP_REFERRAL_BONUS}</b> for each signup.</p>
+                                <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                                    ${allProducts.map(p => `
+                                        <div class="shareable-product-item">
+                                            <img src="${p.imageUrl}" alt="${p.name}">
+                                            <div class="shareable-product-info">
+                                                <h4>${p.name}</h4>
+                                                <span class="potential-earning">(Earn ≈ ₹${Math.round(p.price * PURCHASE_COMMISSION_RATE).toLocaleString('en-IN')})</span>
+                                            </div>
+                                            <button class="btn btn-primary btn-share share-product-btn" data-product-name="${p.name}" data-ref-code="${currentUserData.referralCode}"><i class='bx bxs-share-alt'></i> Share</button>
+                                        </div>`).join('') || '<p>No products to share right now.</p>'}
+                                </div>
+                            </div>
+                            <div id="refer-tab-withdraw" class="refer-tab-pane">
+                                <h3>Withdraw Earnings</h3>
+                                <p style="color: var(--text-muted); margin-bottom: 20px;">You can request a withdrawal once your balance is over ₹${MIN_WITHDRAWAL_AMOUNT}.</p>
+                                <button class="btn btn-primary" id="withdrawal-request-btn" ${earnings < MIN_WITHDRAWAL_AMOUNT ? 'disabled' : ''}>Request Withdrawal of ₹${earnings.toLocaleString('en-IN')}</button>
+                                ${earnings < MIN_WITHDRAWAL_AMOUNT ? `<p style="color: var(--error-color); margin-top: 10px;">You need ₹${(MIN_WITHDRAWAL_AMOUNT - earnings).toLocaleString('en-IN')} more to withdraw.</p>` : ''}
+                            </div>
+                            <div id="refer-tab-history" class="refer-tab-pane">
+                                <h3>Earnings History</h3>
+                                <div style="max-height: 400px; overflow-y: auto;">
+                                    <table class="earnings-history-table">
+                                        <thead><tr><th>Date</th><th>Type</th><th>Amount (₹)</th><th>Details</th></tr></thead>
+                                        <tbody>${history.length > 0 ? history.map(h => `<tr><td>${new Date(h.timestamp).toLocaleDateString()}</td><td>${h.type}</td><td style="color: ${h.amount > 0 ? 'var(--success-color)' : 'var(--error-color)'}; font-weight: 600;">${h.amount > 0 ? '+' : ''}${h.amount.toLocaleString('en-IN')}</td><td>${h.details}</td></tr>`).join('') : `<tr><td colspan="4" style="text-align: center; padding: 20px;">No earnings history yet.</td></tr>`}</tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="refer-tab-profile" class="refer-tab-pane">
+                                <h3>Edit Your Profile</h3>
+                                <p style="color: var(--text-muted); margin-bottom: 20px;">Update your withdrawal details here. This information is used to send you your earnings.</p>
+                                <form id="profile-update-form">
+                                    <div class="form-group"><label>Account Holder's Name</label><input type="text" name="bankAccountHolderName" class="form-input" value="${details.bankAccountHolderName || ''}" required></div>
+                                    <div class="form-group"><label>Bank Name</label><input type="text" name="bankName" class="form-input" value="${details.bankName || ''}" required></div>
+                                    <div class="form-group"><label>Account Number</label><input type="text" name="bankAccountNumber" class="form-input" value="${details.bankAccountNumber || ''}" required></div>
+                                    <div class="form-group"><label>IFSC Code (Optional)</label><input type="text" name="ifscCode" class="form-input" value="${details.ifscCode || ''}"></div>
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">Update Details</button>
+                                </form>
+                                <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border-color);">
+                                <button class="btn btn-danger" id="leave-program-btn" style="width: 100%;">Leave Referral Program</button>
+                                <p style="font-size: 0.8rem; text-align: center; margin-top: 10px; color: var(--text-muted);">If you leave, you can rejoin after ${REFERRAL_LEAVE_WAIT_DAYS} days.</p>
+                            </div>
+                        </div>`;
+                } else {
+                    contentWrapper.innerHTML = `
+                        <div class="content-fade-in" style="text-align:center;">
+                            <h3>Join to Start Earning!</h3>
+                            <p style="color: var(--text-muted); margin: 20px 0 30px 0;">Provide your bank details to join our referral program and start earning commissions.</p>
+                            <form id="referral-join-form" style="text-align:left;">
+                                <div class="form-group"><label>Account Holder's Name</label><input type="text" name="bankAccountHolderName" class="form-input" required></div>
+                                <div class="form-group"><label>Bank Name</label><input type="text" name="bankName" class="form-input" required></div>
+                                <div class="form-group"><label>Account Number</label><input type="text" name="bankAccountNumber" class="form-input" required></div>
+                                <div class="form-group"><label>IFSC Code (Optional)</label><input type="text" name="ifscCode" class="form-input"></div>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Join Program</button>
+                            </form>
+                        </div>`;
+                }
+            } catch (error) { console.error("Error showing referral view:", error); contentWrapper.innerHTML = `<p style="text-align:center; color: var(--error-color)">Error loading referral data. Please try again.</p>`; }
         };
 
-        // --- 4. CART & ORDER LOGIC ---
+        // --- 5. CART, ORDER & HELPERS ---
         const loadCart = () => { const savedCart = localStorage.getItem('atoz_cart'); cart = savedCart ? JSON.parse(savedCart) : []; updateCartCounter(); };
         const saveCart = () => { localStorage.setItem('atoz_cart', JSON.stringify(cart)); updateCartCounter(); };
         const updateCartCounter = () => { const counter = document.getElementById('cart-counter'); const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); counter.textContent = totalItems; counter.style.display = totalItems > 0 ? 'flex' : 'none'; };
+        const addToCart = (productId) => { if (!currentUser) { showToast("Please log in to add items to cart.", "error"); openModal('auth'); return; } const product = allProducts.find(p => p.id === productId); if (!product) return; const existingItem = cart.find(item => item.id === productId); if (existingItem) { existingItem.quantity++; } else { cart.push({ ...product, quantity: 1 }); } saveCart(); showToast(`${product.name} added to cart!`, 'success'); };
+        const updateCartQuantity = (productId, change) => { const itemInCart = cart.find(item => item.id === productId); if (itemInCart) { itemInCart.quantity += change; if (itemInCart.quantity <= 0) { cart = cart.filter(item => item.id !== productId); } saveCart(); renderCartPage(); } };
+        const removeFromCart = (productId) => { cart = cart.filter(item => item.id !== productId); saveCart(); renderCartPage(); showToast("Item removed from cart.", "info"); };
+        const placeOrder = async (isFromCart) => { const form = document.getElementById('order-form'); const btn = document.getElementById('confirm-order-btn'); const selectedPayment = document.querySelector('.payment-option.selected'); if (!selectedPayment) { showToast("Please select a payment method.", "error"); return; } if (selectedPayment.dataset.method !== 'COD' && !form.transactionId.value) { showToast("Please enter the transaction ID.", "error"); return; } if (!form.checkValidity()) { form.reportValidity(); return; } btn.disabled = true; btn.textContent = 'Placing Order...'; const orderData = { userId: currentUser.uid, userName: currentUserData.name, userEmail: currentUser.email, items: currentOrderItems, shippingInfo: { name: form.name.value, phone: form.phone.value, address: form.address.value }, paymentInfo: { method: selectedPayment.dataset.method, transactionId: form.transactionId.value || 'N/A' }, totalAmount: currentOrderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 50, status: 'pending', createdAt: serverTimestamp() }; try { const newOrderRef = push(ref(db, 'orders')); await set(newOrderRef, orderData); openModal('confirmation'); if (isFromCart) { cart = []; saveCart(); } if (!currentUserData.hasMadeFirstPurchase) { await update(ref(db, `users/${currentUser.uid}`), { hasMadeFirstPurchase: true }); } setTimeout(() => { closeModal(); showView('order-history-view'); renderOrderHistory(); renderCartPage(); }, 3500); } catch (err) { console.error("Order failed:", err); showToast("Could not place order. Please try again.", "error"); } finally { btn.disabled = false; btn.textContent = 'Confirm Order'; } };
+        function copyTextToClipboard(text) { if (navigator.clipboard && window.isSecureContext) { return navigator.clipboard.writeText(text); } else { let textArea = document.createElement("textarea"); textArea.value = text; textArea.style.position = "fixed"; textArea.style.left = "-999999px"; document.body.appendChild(textArea); textArea.focus(); textArea.select(); return new Promise((res, rej) => { document.execCommand('copy') ? res() : rej(); textArea.remove(); }); } }
 
-        const addToCart = (productId) => {
-            if (!currentUser) { showToast("Please log in to add items to cart.", "error"); openModal('auth'); return; }
-            const product = allProducts.find(p => p.id === productId); if (!product) return;
-            const existingItem = cart.find(item => item.id === productId);
-            if (existingItem) { existingItem.quantity++; } else { cart.push({ ...product, quantity: 1 }); }
-            saveCart(); showToast(`${product.name} added to cart!`, 'success');
-        };
-        
-        const updateCartQuantity = (productId, change) => {
-            const itemInCart = cart.find(item => item.id === productId);
-            if (itemInCart) {
-                itemInCart.quantity += change;
-                if (itemInCart.quantity <= 0) { cart = cart.filter(item => item.id !== productId); }
-                saveCart(); renderCartPage();
-            }
-        };
-
-        const removeFromCart = (productId) => { cart = cart.filter(item => item.id !== productId); saveCart(); renderCartPage(); };
-        
-        const placeOrder = async (fromCart) => {
-            const form = document.getElementById('order-form'); const btn = document.getElementById('confirm-order-btn');
-            if (form.querySelector('#transaction-id-group input:required') && !form.transactionId.value) { showToast("Please enter the transaction ID.", "error"); return; }
-            if (!form.checkValidity()) { form.reportValidity(); return; }
-            btn.disabled = true; btn.textContent = 'Placing Order...';
-            
-            const orderData = { userId: currentUser.uid, items: currentOrderItems, shippingInfo: { name: form.name.value, phone: form.phone.value, address: form.address.value }, paymentInfo: { method: document.querySelector('.payment-option.selected')?.dataset.method, transactionId: form.transactionId.value || 'N/A' }, totalAmount: currentOrderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 50, status: 'pending', createdAt: serverTimestamp() };
-            try {
-                // --- FIX: Writing order to Realtime Database ---
-                await set(push(ref(db, 'orders')), orderData);
-                openModal('confirmation');
-                if (fromCart) { cart = []; saveCart(); }
-                setTimeout(() => { closeModal(); showView('home-view'); renderCartPage(); }, 3000);
-            } catch (err) { console.error("Order failed:", err); showToast("Could not place order. Please try again.", "error");
-            } finally { btn.disabled = false; btn.textContent = 'Confirm Order'; }
-        };
-
-        // --- 5. EVENT LISTENERS ---
+        // --- 6. EVENT LISTENERS ---
         function setupEventListeners() {
             document.body.addEventListener('click', async (e) => {
-                const target = e.target; const closest = (selector) => target.closest(selector);
-
-                if (target.id === 'logo-link' || closest('#logo-link')) { e.preventDefault(); showView('home-view'); }
-                if (target.id === 'user-icon' || closest('#user-icon')) { document.getElementById('user-dropdown').classList.toggle('active'); } 
-                else if (!closest('#user-icon-container')) { document.getElementById('user-dropdown').classList.remove('active'); }
-                if (target.id === 'cart-icon' || closest('#cart-icon')) { showView('cart-view'); renderCartPage(); }
-                if (target.matches('.close-modal-btn') || (target.matches('.modal-overlay') && !closest('.modal-content'))) { closeModal(); }
-                if (closest('.login-link')) { openModal('auth'); }
-                if (closest('.logout-link')) { await signOut(auth); showToast('Logged out successfully.', 'success'); }
-                if (closest('.purchase-history-link')) { e.preventDefault(); showView('order-history-view'); await renderOrderHistory(); }
-                if (closest('.admin-panel-link')) { window.open('admin.html', '_blank'); } // Opens admin panel in a new tab
-                if (closest('.add-to-cart-btn')) addToCart(closest('.add-to-cart-btn').dataset.id);
-                if (closest('.order-now-btn')) {
-                    if (!currentUser) { showToast("Please log in to place an order.", "error"); openModal('auth'); return; }
-                    const product = allProducts.find(p => p.id === closest('.order-now-btn').dataset.id);
-                    if (product) {
-                        currentOrderItems = [{...product, quantity: 1}];
-                        document.getElementById('order-items-summary').textContent = `Ordering: ${product.name}`;
-                        openModal('order'); document.getElementById('order-form').dataset.fromCart = 'false';
-                    }
-                }
-                if (target.id === 'checkout-from-cart-btn') { 
-                    if (!currentUser) { showToast("Please log in to checkout.", "error"); openModal('auth'); return; }
-                    if (cart.length > 0) { currentOrderItems = cart; document.getElementById('order-items-summary').textContent = `Ordering: ${cart.length} items from cart`; openModal('order'); document.getElementById('order-form').dataset.fromCart = 'true'; }
-                }
-                if(closest('.quantity-btn')) { updateCartQuantity(closest('.quantity-btn').dataset.id, parseInt(closest('.quantity-btn').dataset.change)); }
-                if(closest('.remove-from-cart-btn')) { if(confirm('Are you sure you want to remove this item?')) removeFromCart(closest('.remove-from-cart-btn').dataset.id); }
-                if (closest('.show-signup-link')) { e.preventDefault(); document.getElementById('login-form-container').style.display='none'; document.getElementById('signup-form-container').style.display='block'; }
-                if (closest('.show-login-link, .back-to-login-link')) { e.preventDefault(); document.getElementById('signup-form-container').style.display='none'; document.getElementById('forgot-password-container').style.display='none'; document.getElementById('login-form-container').style.display='block';}
-                if (closest('.show-forgot-link')) { e.preventDefault(); document.getElementById('login-form-container').style.display='none'; document.getElementById('forgot-password-container').style.display='block';}
-                if(target.id === 'next-step-btn') {
-                    const form = document.getElementById('order-form');
-                    if (form.name.value && form.phone.value && form.address.value) { document.getElementById('step-1').style.display='none'; document.getElementById('step-2').style.display='block'; } else { showToast("Please fill all shipping details.", "error"); }
-                }
-                if(closest('.payment-option')) {
-                    document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
-                    const selectedOption = closest('.payment-option');
-                    selectedOption.classList.add('selected'); document.getElementById('confirm-order-btn').disabled = false;
-                    const method = selectedOption.dataset.method;
-                    const qrDisplay = document.getElementById('qr-code-display'); const qrImageEl = document.getElementById('qr-image');
-                    const txGroup = document.getElementById('transaction-id-group'); const txInput = txGroup.querySelector('input');
-                    if (method === 'COD') { qrDisplay.style.display = 'none'; txGroup.style.display = 'none'; txInput.required = false; } 
-                    else { qrImageEl.src = qrCodeImages[method]; qrImageEl.alt = `${method} QR Code`; qrDisplay.style.display = 'block'; txGroup.style.display = 'block'; txInput.required = true; }
+                const target = e.target;
+                const closest = (selector) => target.closest(selector); 
+                if (closest('#logo-link') || closest('#cart-continue-shopping') || closest('#history-start-shopping')) { e.preventDefault(); showView('home-view'); } 
+                if (closest('#explore-products-btn')) { document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' }); }
+                if (closest('#user-icon')) { document.getElementById('user-dropdown').classList.toggle('active'); } 
+                else if (!closest('#user-icon-container')) { document.getElementById('user-dropdown').classList.remove('active'); } 
+                if (closest('#cart-icon')) { showView('cart-view'); renderCartPage(); } 
+                if (closest('.close-modal-btn') || (target.matches('.modal-overlay') && !closest('.modal-content'))) { closeModal(); } 
+                if (closest('.login-link')) { openModal('auth'); } 
+                if (closest('.show-signup-link')) { e.preventDefault(); document.getElementById('login-form-container').style.display='none'; document.getElementById('signup-form-container').style.display='block'; } 
+                if (closest('.show-login-link, .back-to-login-link')) { e.preventDefault(); document.getElementById('signup-form-container').style.display='none'; document.getElementById('forgot-password-container').style.display='none'; document.getElementById('login-form-container').style.display='block';} 
+                if (closest('.show-forgot-link')) { e.preventDefault(); document.getElementById('login-form-container').style.display='none'; document.getElementById('forgot-password-container').style.display='block';} 
+                if(target.id === 'next-step-btn') { const form = document.getElementById('order-form'); if (form.name.value && form.phone.value && form.address.value) { document.getElementById('step-1').style.display='none'; document.getElementById('step-2').style.display='block'; } else { showToast("Please fill all shipping details.", "error"); } } 
+                if(closest('.payment-option')) { document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected')); const selectedOption = closest('.payment-option'); selectedOption.classList.add('selected'); document.getElementById('confirm-order-btn').disabled = false; const method = selectedOption.dataset.method; const qrDisplay = document.getElementById('qr-code-display'); const txGroup = document.getElementById('transaction-id-group'); if (method === 'COD') { qrDisplay.style.display = 'none'; txGroup.style.display = 'none'; } else { qrDisplay.querySelector('#qr-image').src = qrCodeImages[method]; qrDisplay.style.display = 'block'; txGroup.style.display = 'block'; } } 
+                if (closest('.logout-link')) { await signOut(auth); showToast('Logged out successfully.', 'success'); } 
+                if (closest('.purchase-history-link')) { e.preventDefault(); showView('order-history-view'); await renderOrderHistory(); } 
+                if (closest('.refer-earn-link')) { e.preventDefault(); await showReferralView(); } 
+                if (closest('.admin-panel-link')) { window.open('admin.html', '_blank'); } 
+                if (closest('.add-to-cart-btn')) { addToCart(closest('.add-to-cart-btn').dataset.id); }
+                if (closest('.order-now-btn')) { if (!currentUser) { showToast("Please log in to place an order.", "error"); openModal('auth'); return; } const product = allProducts.find(p => p.id === closest('.order-now-btn').dataset.id); if (product) { currentOrderItems = [{...product, quantity: 1}]; document.getElementById('order-items-summary').textContent = `Ordering: ${product.name}`; openModal('order'); document.getElementById('order-form').dataset.fromCart = 'false'; } }
+                if (target.id === 'checkout-from-cart-btn') { if (!currentUser) { showToast("Please log in to checkout.", "error"); openModal('auth'); return; } if (cart.length > 0) { currentOrderItems = cart; document.getElementById('order-items-summary').textContent = `Ordering: ${cart.length} items from cart`; openModal('order'); document.getElementById('order-form').dataset.fromCart = 'true'; } } 
+                if(closest('.quantity-btn')) { updateCartQuantity(closest('.quantity-btn').dataset.id, parseInt(closest('.quantity-btn').dataset.change)); } 
+                if(closest('.remove-from-cart-btn')) { if(confirm('Are you sure you want to remove this item?')) removeFromCart(closest('.remove-from-cart-btn').dataset.id); } 
+                if(closest('.refer-tab-btn')) { const tabButton = closest('.refer-tab-btn'); const tabName = tabButton.dataset.tab; document.querySelectorAll('.refer-tab-btn').forEach(btn => btn.classList.remove('active')); document.querySelectorAll('.refer-tab-pane').forEach(pane => pane.classList.remove('active')); tabButton.classList.add('active'); document.getElementById(`refer-tab-${tabName}`).classList.add('active'); }
+                if (closest('#copy-code-box')) { const code = document.querySelector('#copy-code-box .code').textContent; copyTextToClipboard(code).then(() => showToast('Referral code copied!', 'success')).catch(() => showToast('Could not copy code.', 'error')); } 
+                if (closest('.share-product-btn')) { const btn = closest('.share-product-btn'); const productName = btn.dataset.productName; const refCode = btn.dataset.refCode; const shareUrl = `${window.location.origin}${window.location.pathname}?ref=${refCode}`; const shareText = `Check out this ${productName} on ATOZ Mobile! Use my link to sign up and get awesome deals: ${shareUrl}`; const shareData = { title: `AtoZ Mobile - ${productName}`, text: shareText, url: shareUrl }; if (navigator.share) { await navigator.share(shareData).catch(err => console.error('Error sharing:', err)); } else { copyTextToClipboard(shareText).then(() => showToast('Share link copied!', 'success')).catch(() => showToast('Could not copy.', 'error')); } }
+                if (target.id === 'withdrawal-request-btn') { if (!confirm("Are you sure you want to request a withdrawal?")) return; target.disabled = true; target.textContent = 'Submitting...'; try { const balance = currentUserData.earnings?.balance || 0; if (balance >= MIN_WITHDRAWAL_AMOUNT) { await push(ref(db, 'withdrawals'), { userId: currentUser.uid, userName: currentUserData.name, amount: balance, status: 'pending', requestedAt: serverTimestamp(), withdrawalDetails: currentUserData.withdrawalDetails }); showToast('Withdrawal request submitted!', 'success'); target.textContent = 'Request Submitted'; } else { showToast(`You need at least ₹${MIN_WITHDRAWAL_AMOUNT} to withdraw.`, 'error'); target.disabled = false; } } catch (error) { showToast('Failed to submit request.', 'error'); target.disabled = false; target.textContent = `Request Withdrawal of ₹${(currentUserData.earnings?.balance || 0).toLocaleString('en-IN')}`; } }
+                if (target.id === 'leave-program-btn') { if (confirm("Are you sure you want to leave the referral program?\nYou will not earn commissions and can only rejoin after 30 days.")) { try { await update(ref(db, `users/${currentUser.uid}`), { withdrawalDetailsComplete: false, leftReferralProgramAt: serverTimestamp() }); showToast("You have left the referral program.", "info"); await showReferralView(); } catch (err) { showToast("Could not leave program. Please try again.", "error"); } } }
+                
+                // UX IMPROVEMENT: alert() ko hata kar showToast() ka istemal kiya gaya.
+                if (closest('#refund-policy-link') || closest('#terms-link')) { 
+                    e.preventDefault(); 
+                    showToast("This page is under construction. Please check back later.", "info"); 
                 }
             });
 
-            document.body.addEventListener('submit', async (e) => {
-                e.preventDefault(); const form = e.target; const btn = form.querySelector('button[type="submit"]');
-                const originalText = btn.textContent; btn.disabled = true; btn.textContent = 'Processing...';
-                try {
-                    if (form.id === 'order-form') { await placeOrder(form.dataset.fromCart === 'true'); }
-                    else if (form.id === 'login-form') { await signInWithEmailAndPassword(auth, form.email.value, form.password.value); showToast("Login Successful!", "success"); closeModal(); }
-                    else if (form.id === 'signup-form') { 
-                        const userCredential = await createUserWithEmailAndPassword(auth, form.email.value, form.password.value);
-                        // --- FIX: Writing user data to Realtime Database ---
-                        await set(ref(db, `users/${userCredential.user.uid}`), { name: form.name.value, email: form.email.value, createdAt: serverTimestamp() });
-                        showToast("Account created successfully!", "success"); closeModal();
-                    } else if (form.id === 'forgot-password-form') { 
-                        await sendPasswordResetEmail(auth, form.email.value);
-                        showToast("Password reset link sent to your email!", "success"); document.querySelector('.back-to-login-link').click();
-                    }
-                } catch (err) { showToast(err.message, "error"); console.error(err);
-                } finally { if (form.id !== 'order-form') { btn.disabled = false; btn.textContent = originalText; } }
+            document.body.addEventListener('submit', async (e) => { 
+                e.preventDefault(); 
+                const form = e.target; 
+                const btn = form.querySelector('button[type="submit"]'); 
+                const originalText = btn.textContent; 
+                btn.disabled = true; 
+                btn.textContent = 'Processing...'; 
+                try { 
+                    if (form.id === 'order-form') { await placeOrder(form.dataset.fromCart === 'true'); } 
+                    else if (form.id === 'login-form') { await signInWithEmailAndPassword(auth, form.email.value, form.password.value); showToast("Login Successful! Welcome back.", "success"); closeModal(); } 
+                    else if (form.id === 'signup-form') { const userCredential = await createUserWithEmailAndPassword(auth, form.email.value, form.password.value); const enteredReferralCode = form.referralCode.value.trim().toUpperCase(); if (enteredReferralCode) { const q = query(ref(db, 'users'), orderByChild('referralCode'), equalTo(enteredReferralCode)); const snapshot = await get(q); if (snapshot.exists()) { const referredByUID = Object.keys(snapshot.val())[0]; const referrerRef = ref(db, `users/${referredByUID}`); const referrerSnapshot = await get(referrerRef); if(referrerSnapshot.exists()) { const referrerData = referrerSnapshot.val(); const currentBalance = referrerData.earnings?.balance || 0; await update(referrerRef, {'earnings/balance': currentBalance + SIGNUP_REFERRAL_BONUS }); await push(ref(db, `users/${referredByUID}/earnings/history`), { amount: SIGNUP_REFERRAL_BONUS, type: 'Signup Bonus', details: `For new user: ${form.email.value}`, timestamp: serverTimestamp() }); await set(ref(db, `users/${userCredential.user.uid}/referredBy`), referredByUID); showToast(`Referrer received a ₹${SIGNUP_REFERRAL_BONUS} bonus!`, "success"); } } } const userData = { name: form.name.value, email: form.email.value, createdAt: serverTimestamp(), referralCode: userCredential.user.uid.slice(-6).toUpperCase(), earnings: { balance: 0 }, hasMadeFirstPurchase: false, withdrawalDetailsComplete: false }; await set(ref(db, `users/${userCredential.user.uid}`), userData); showToast("Account created successfully!", "success"); closeModal(); } 
+                    else if (form.id === 'forgot-password-form') { await sendPasswordResetEmail(auth, form.email.value); showToast("Password reset link sent to your email!", "success"); document.querySelector('.back-to-login-link').click(); }
+                    else if (form.id === 'referral-join-form') { const details = { bankAccountHolderName: form.bankAccountHolderName.value, bankName: form.bankName.value, bankAccountNumber: form.bankAccountNumber.value, ifscCode: form.ifscCode.value }; await update(ref(db, `users/${currentUser.uid}`), { withdrawalDetails: details, withdrawalDetailsComplete: true, leftReferralProgramAt: null }); showToast('Welcome to the program!', 'success'); await showReferralView(); }
+                    else if (form.id === 'profile-update-form') { const updatedDetails = { bankAccountHolderName: form.bankAccountHolderName.value, bankName: form.bankName.value, bankAccountNumber: form.bankAccountNumber.value, ifscCode: form.ifscCode.value }; await update(ref(db, `users/${currentUser.uid}/withdrawalDetails`), updatedDetails); currentUserData.withdrawalDetails = updatedDetails; showToast('Profile details updated successfully!', 'success'); }
+                } catch (err) { showToast(err.message, "error"); console.error(err); } 
+                finally { btn.disabled = false; btn.textContent = originalText; } 
             });
-
-            document.getElementById('product-search-input').addEventListener('input', (e) => {
-                 renderProducts(allProducts.filter(p => p.name.toLowerCase().includes(e.target.value.toLowerCase())));
-            });
+            document.getElementById('product-search-input').addEventListener('input', (e) => { const searchTerm = e.target.value.toLowerCase(); renderProducts(allProducts.filter(p => p.name.toLowerCase().includes(searchTerm))); });
         }
         
+        // --- 7. DATA LOADING FUNCTIONS ---
         async function loadProducts() {
             const productGrid = document.getElementById('product-grid');
             try {
-                // --- FIX: Reading products from Realtime Database ---
-                const productsRef = ref(db, 'products');
-                onValue(productsRef, (snapshot) => {
-                    if (snapshot.exists()) {
-                        const productsData = snapshot.val();
-                        allProducts = Object.keys(productsData).map(key => ({ id: key, ...productsData[key] }));
-                        renderProducts(allProducts.reverse());
-                    } else {
-                        productGrid.innerHTML = '';
-                        showToast("No products available right now.", "info");
-                    }
-                });
-            } catch (error) { console.error("Error loading products:", error); productGrid.innerHTML = ''; showToast("Failed to load products.", "error"); }
+                const snapshot = await get(ref(db, 'products'));
+                if (snapshot.exists()) {
+                    const productsData = snapshot.val();
+                    allProducts = Object.keys(productsData).map(key => ({ id: key, ...productsData[key] })).reverse();
+                    renderProducts(allProducts);
+                } else { productGrid.innerHTML = `<p style="text-align:center;">No products available right now.</p>`; }
+            } catch (error) { console.error("Error loading products:", error); productGrid.innerHTML = `<p style="color:var(--error-color); text-align:center;">Failed to load products. Please check your internet connection.</p>`; showToast("Failed to load products.", "error"); }
         }
         
-        // --- 6. APP INITIALIZATION ---
+        async function loadAndRenderPromotions() {
+            const grid = document.getElementById('youtube-channels-grid');
+            try {
+                const snapshot = await get(ref(db, 'sitePromotions'));
+                if (snapshot.exists()) {
+                    const promotions = snapshot.val();
+                    grid.innerHTML = Object.values(promotions).map(promo => `<a href="${promo.channelUrl}" target="_blank" class="channel-card"><i class='bx bxl-youtube'></i><h4>${promo.channelName}</h4><p>Subscribe Now</p></a>`).join('');
+                } else { grid.innerHTML = `<p style="text-align:center; color: var(--text-muted); grid-column: 1 / -1;">No channels are being promoted right now.</p>`; }
+            } catch (error) { console.error("Error loading site promotions:", error); grid.innerHTML = `<p style="text-align:center; color: var(--text-muted); grid-column: 1 / -1;">Could not load promotions.</p>`; }
+        }
+        
+        // --- 8. APP INITIALIZATION ---
         async function main() {
             onAuthStateChanged(auth, async (user) => {
-                currentUser = user; const dropdown = document.getElementById('user-dropdown');
+                const dropdown = document.getElementById('user-dropdown');
+                currentUser = user;
                 if (user) {
-                    // --- FIX: Reading user data from Realtime Database to check for admin ---
-                    const userRef = ref(db, `users/${user.uid}`);
-                    const snapshot = await get(userRef);
-                    isAdmin = snapshot.exists() && snapshot.val().isAdmin === true;
-                    dropdown.innerHTML = `${isAdmin ? `<button class="dropdown-item admin-panel-link"><i class='bx bxs-dashboard'></i>Admin</button>` : ''}<button class="dropdown-item purchase-history-link"><i class='bx bx-history'></i>Orders</button><hr style="margin:4px 0;border:none;border-top:1px solid var(--border-color);"><button class="dropdown-item logout-link"><i class='bx bx-log-out'></i>Logout</button>`;
+                    const isAdmin = ADMIN_UIDS.includes(user.uid);
+                    if (isAdmin) {
+                        currentUserData = { name: "Admin", isAdmin: true };
+                        dropdown.innerHTML = `<button class="dropdown-item admin-panel-link"><i class='bx bxs-dashboard'></i>Admin Panel</button><hr style="margin:4px 0;border:none;border-top:1px solid var(--border-color);"><button class="dropdown-item logout-link"><i class='bx bx-log-out'></i>Logout</button>`;
+                    } else {
+                        const userRef = ref(db, `users/${user.uid}`);
+                        const snapshot = await get(userRef);
+                        if (snapshot.exists()) {
+                            currentUserData = snapshot.val();
+                        } else {
+                            const newUserData = { name: user.displayName || user.email.split('@')[0], email: user.email, createdAt: serverTimestamp(), referralCode: user.uid.slice(-6).toUpperCase(), earnings: { balance: 0 }, hasMadeFirstPurchase: false, withdrawalDetailsComplete: false };
+                            await set(userRef, newUserData);
+                            currentUserData = newUserData;
+                        }
+                        dropdown.innerHTML = `<button class="dropdown-item purchase-history-link"><i class='bx bx-history'></i>My Orders</button><button class="dropdown-item refer-earn-link"><i class='bx bxs-star'></i>Refer & Earn</button><hr style="margin:4px 0;border:none;border-top:1px solid var(--border-color);"><button class="dropdown-item logout-link"><i class='bx bx-log-out'></i>Logout</button>`;
+                    }
                 } else {
-                    isAdmin = false; currentUser = null;
+                    currentUserData = null;
                     dropdown.innerHTML = `<button class="dropdown-item login-link"><i class='bx bx-log-in'></i>Login / Signup</button>`;
                 }
                 loadCart();
             });
             await loadProducts();
+            await loadAndRenderPromotions();
             setupEventListeners();
+            
+            const params = new URLSearchParams(window.location.search);
+            const refCode = params.get('ref');
+            if (refCode && !auth.currentUser) {
+                const signupReferralInput = document.querySelector('#signup-form-container input[name="referralCode"]');
+                if (signupReferralInput) signupReferralInput.value = refCode;
+                openModal('auth');
+                document.querySelector('.show-signup-link').click();
+            }
         }
 
+        // Start the application
         main();
     </script>
 </body>
