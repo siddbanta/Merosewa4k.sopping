@@ -1,1131 +1,147 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en"> <!-- Language set to English -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AtoZ Mobile - Your Go-To Tech Store</title>
-    <!-- Google Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+    <title>Coming Soon</title>
     <style>
-        /* --- CSS Variables for Theming (Light & Dark Mode) --- */
-        :root {
-            --primary-color: #007aff;
-            --primary-color-light: #e5f1ff;
-            --bg-color: #f4f6f8;
-            --card-bg: #ffffff;
-            --text-color: #1d1d1f;
-            --text-muted: #6e6e73;
-            --border-color: #e1e4e8;
-            --hover-color: #f8f9fa;
-            --danger-color: #ff3b30;
-            --success-color: #34c759;
-            --warning-color: #ffc409;
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --transition-speed: 0.2s;
+        /* Google Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        [data-theme="dark"] {
-            --primary-color: #0a84ff;
-            --primary-color-light: #1c3d5e;
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --border-color: #3a3a3c;
-            --hover-color: #2a2a2a;
-        }
-
-        /* --- Global Resets & Body Styles --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Body Styles */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-size: 14px;
-            line-height: 1.6;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
-        }
-
-        /* --- Utility & Layout Classes --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .view { display: none; animation: fadeIn 0.4s ease; }
-        .view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- Header Styles --- */
-        header {
-            background: var(--card-bg);
-            padding: 15px 25px;
-            box-shadow: var(--shadow-sm);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #000000);
+            color: #f0f0f0;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            transition: background-color var(--transition-speed), border-color var(--transition-speed);
-        }
-        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        .header-btn {
-            background: none; border: none; font-size: 26px; cursor: pointer; color: var(--text-muted);
-            position: relative; transition: color var(--transition-speed);
-        }
-        .header-btn:hover { color: var(--primary-color); }
-        .cart-count {
-            position: absolute; top: -5px; right: -8px; background-color: var(--danger-color); color: white;
-            font-size: 11px; width: 18px; height: 18px; border-radius: 50%; display: flex;
-            justify-content: center; align-items: center; font-weight: 600;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            padding: 1rem;
+            
+            /* --- NEW ANIMATION ADDED --- */
+            background-size: 400% 400%; /* Make the background larger to animate its position */
+            animation: animateGradient 15s ease-in-out infinite;
         }
 
-        /* --- General Component Styles (Cards, Buttons, Forms) --- */
-        .page-header { margin-bottom: 30px; }
-        .page-header h1 { font-size: 32px; font-weight: 700; }
-        .page-header p { font-size: 16px; color: var(--text-muted); margin-top: 5px; }
-        .card {
-            background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color); margin-bottom: 20px;
-            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+        /* --- KEYFRAMES FOR NEW BACKGROUND ANIMATION --- */
+        @keyframes animateGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .btn {
-            padding: 12px 20px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer;
-            transition: all var(--transition-speed); display: inline-flex; justify-content: center; align-items: center; gap: 8px; text-decoration: none;
-        }
-        .btn:disabled { background-color: #ccc !important; color: #666 !important; cursor: not-allowed; transform: none; box-shadow: none; }
-        .btn-primary { background-color: var(--primary-color); color: white; }
-        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: var(--shadow-md); background-color: #006ce0; }
-        .btn-secondary { background-color: var(--hover-color); color: var(--text-color); border: 1px solid var(--border-color); }
-        .btn-secondary:hover:not(:disabled) { background-color: var(--border-color); }
 
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-muted); }
-        .form-input, .form-textarea {
-            width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px;
-            font-size: 1rem; background-color: var(--bg-color); color: var(--text-color);
-            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        /* Main Container */
+        .container {
+            max-width: 600px;
         }
-        .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px var(--primary-color-light); }
-        .breadcrumb { margin-bottom: 20px; font-size: 14px; }
-        .breadcrumb a { color: var(--primary-color); text-decoration: none; }
 
-        /* --- Shop Page Styles --- */
-        #shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
-        .product-card {
-            background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color); text-decoration: none; color: var(--text-color);
-            display: flex; flex-direction: column; transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-        .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-        .product-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-bottom: 1px solid var(--border-color); }
-        .product-card-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
-        .product-card h3 { font-size: 16px; margin-bottom: 8px; font-weight: 600; }
-        .product-card .price { font-size: 18px; font-weight: 700; color: var(--primary-color); margin-top: auto; }
-
-        /* --- Product Detail Page Styles --- */
-        #product-detail-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
-        .product-info h1 { font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2; }
-        .product-info .brand { color: var(--text-muted); margin-bottom: 15px; font-weight: 500; }
-        .product-info .price { font-size: 2.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; }
-        .variant-radios { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .variant-radios input { display: none; }
-        .variant-radios .variant-label {
-            padding: 8px 15px; border: 2px solid var(--border-color); border-radius: 20px;
-            cursor: pointer; transition: all var(--transition-speed);
-        }
-        .variant-radios input:checked + .variant-label {
-            border-color: var(--primary-color); background-color: var(--primary-color-light);
-            color: var(--primary-color); font-weight: 600;
-        }
-        .product-actions { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
-        .spec-table { width: 100%; margin-top: 25px; border-collapse: collapse; }
-        .spec-table td { padding: 10px 0; border-bottom: 1px solid var(--border-color); }
-        .spec-table tr:last-child td { border: none; }
-        .spec-table td:first-child { color: var(--text-muted); width: 120px; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: var(--shadow-md); }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        
-        /* --- Image Slider Styles --- */
-        .image-slider { position: relative; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
-        .image-slider-track { display: flex; transition: transform 0.3s ease-in-out; }
-        .image-slider-track img { width: 100%; flex-shrink: 0; aspect-ratio: 1/1; object-fit: cover; }
-        .slider-btn {
-            position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4);
-            color: white; border: none; border-radius: 50%; width: 40px; height: 40px;
-            font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: background 0.2s;
-        }
-        .slider-btn:hover { background: rgba(0,0,0,0.6); }
-        .slider-btn.prev { left: 10px; }
-        .slider-btn.next { right: 10px; }
-
-        /* --- Reviews Section Styles --- */
-        #reviews-section .review-card { border-bottom: 1px solid var(--border-color); padding: 20px 0; }
-        #reviews-section .review-card:last-child { border: none; padding-bottom: 0; }
-        #reviews-section .review-card:first-of-type { padding-top: 0; }
-        .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-        .review-header strong { font-size: 15px; }
-        .review-header small { color: var(--text-muted); }
-        .admin-reply { margin-top: 15px; padding: 15px; background-color: var(--bg-color); border-left: 3px solid var(--primary-color); border-radius: 4px; }
-        
-        /* --- Cart & Checkout Page Styles --- */
-        #cart-view .card, #checkout-view .card { padding: 0; }
-        .cart-item { display: flex; padding: 20px; border-bottom: 1px solid var(--border-color); gap: 15px; align-items: center; }
-        .cart-item:last-child { border-bottom: none; }
-        .quantity-control { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
-        .quantity-control button { background: var(--bg-color); border: 1px solid var(--border-color); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 18px; }
-        #checkout-container { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
-        
-        /* --- Payment Options Styles --- */
-        .payment-options { margin-top: 20px; }
-        .payment-options input { display: none; }
-        .payment-options label {
-            display: flex; align-items: center; padding: 15px; border: 2px solid var(--border-color);
-            border-radius: 8px; cursor: pointer; margin-bottom: 10px; transition: all var(--transition-speed);
-        }
-        .payment-options label:hover { border-color: var(--primary-color); }
-        .payment-options input:checked + label { border-color: var(--primary-color); box-shadow: 0 0 0 2px var(--primary-color-light); }
-        .payment-options img { height: 30px; margin-right: 15px; }
-        #qr-code-display {
-            display: none; margin-top: 20px; padding: 20px; border: 1px dashed var(--border-color); border-radius: 8px; text-align: center;
-        }
-        #qr-code-display img { max-width: 200px; margin-bottom: 15px; border-radius: 8px; }
-
-        /* --- Footer Styles --- */
-        footer { margin-top: 50px; background: var(--card-bg); padding: 40px 20px; border-top: 1px solid var(--border-color); text-align: center; }
-        .footer-links { margin-bottom: 15px; }
-        .footer-links a { margin: 0 10px; text-decoration: none; color: var(--text-muted); transition: color var(--transition-speed); }
-        .footer-links a:hover { color: var(--primary-color); }
-
-        /* --- Modal Styles --- */
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000;
-            display: none; justify-content: center; align-items: center; padding: 15px;
-        }
-        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
-        .modal-container { background: var(--card-bg); padding: 30px; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: var(--shadow-md); position: relative; }
-        .modal-form { display: none; }
-        .modal-form.active { display: block; }
-        .auth-link { color: var(--primary-color); cursor: pointer; text-decoration: none; font-weight: 500; }
-        .auth-link:hover { text-decoration: underline; }
-
-        /* --- Share & Earn Page Styles --- */
-        .earnings-display {
-            background: var(--primary-color-light); padding: 20px; text-align: center; border-radius: 12px;
-            border: 2px dashed var(--primary-color); margin-bottom: 30px;
-        }
-        .earnings-display .label { font-size: 1rem; color: var(--primary-color); }
-        .earnings-display .amount { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin: 5px 0; }
-        
-        .sharable-product-list {
-            display: grid;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .sharable-product-item {
+        /* Loader Wrapper (Initially Visible) */
+        #loader-wrapper {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: var(--bg-color);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
         }
-        .sharable-product-item img {
+
+        .loader {
+            border: 5px solid rgba(255, 255, 255, 0.2); /* Light grey */
+            border-top: 5px solid #3498db; /* Blue */
+            border-radius: 50%;
             width: 60px;
             height: 60px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-        .sharable-product-item-info {
-            flex-grow: 1;
-        }
-        .sharable-product-item-info h4 {
-            margin: 0;
-            font-size: 15px;
+            animation: spin 1.5s linear infinite;
+            margin-bottom: 1.5rem;
         }
 
-        /* --- Responsive Media Queries --- */
-        @media (min-width: 768px) {
-            #shop-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        @media (max-width: 992px) {
-            #product-detail-container, #checkout-container { grid-template-columns: 1fr; }
+        
+        .loading-text {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            letter-spacing: 1px;
         }
-         @media (max-width: 480px) {
-             .product-actions { grid-template-columns: 1fr; }
-         }
+
+        /* Main Content (Initially Hidden) */
+        #main-content {
+            display: none; /* Hidden by default, made visible by JS */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .main-heading {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #3498db;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            animation: float 4s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            margin-bottom: 2rem;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <a href="#" class="logo home-link">AtoZ Mobile</a>
-        <div class="header-actions">
-            <div id="user-auth-section"></div>
-            <button class="header-btn" id="cart-button" title="View Cart"><i class='bx bxs-cart'></i><span class="cart-count" id="cart-item-count">0</span></button>
-            <button class="header-btn" id="theme-toggle" title="Toggle Theme"><i class='bx bx-sun'></i></button>
+    <div class="container">
+        <!-- Section 1: Loader (Visible at start) -->
+        <div id="loader-wrapper">
+            <div class="loader"></div>
+            <!-- Translated Text -->
+            <p class="loading-text">Getting things ready...</p>
         </div>
-    </header>
 
-    <!-- Main Content Area where different views will be loaded -->
-    <main class="container">
-        <!-- View for Shop Grid -->
-        <section id="shop-view" class="view active">
-            <div class="page-header">
-                <h1>Find Everything Here</h1>
-                <p>The latest gadgets and accessories at the best prices.</p>
-            </div>
-
-            <!-- Search Bar -->
-            <div class="form-group" style="margin-bottom: 30px;">
-                <input type="search" id="product-search-input" class="form-input" placeholder="Search for products or brands...">
-            </div>
-
-            <!-- [NAYA FEATURE] Recently Viewed (History) Placeholder -->
-            <div id="history-container">
-                <!-- History content will be loaded here by JS -->
-            </div>
-
-            <!-- Main Grid for Products -->
-            <div id="shop-grid"><p>Loading products...</p></div>
-        </section>
-
-        <!-- View for Product Details -->
-        <section id="product-detail-view" class="view">
-            <div class="breadcrumb"><a href="#" class="home-link">Home</a> / <span id="product-breadcrumb-name">Product</span></div>
-            <div id="product-detail-content"></div>
-        </section>
-
-        <!-- View for Shopping Cart -->
-        <section id="cart-view" class="view">
-            <div class="page-header"><h1>Your Shopping Cart</h1></div>
-            <div class="card" id="cart-content-wrapper"></div>
-        </section>
-
-        <!-- View for Checkout -->
-        <section id="checkout-view" class="view">
-            <div class="page-header"><h1>Checkout</h1></div>
-            <form id="checkout-form"><div id="checkout-container"></div></form>
-        </section>
-
-        <!-- View for Order Success Confirmation -->
-        <section id="order-success-view" class="view">
-            <div class="card" style="text-align: center; padding: 50px 20px;">
-                <i class='bx bxs-check-circle' style="font-size: 80px; color: var(--success-color); margin-bottom: 20px;"></i>
-                <h1>Thank You!</h1>
-                <p>Your order has been placed successfully.</p>
-                <p>Order ID: <strong id="success-order-id"></strong></p><br>
-                <button class="btn btn-primary home-link">Continue Shopping</button>
-            </div>
-        </section>
-        
-        <!-- View for Share & Earn -->
-        <section id="earn-view" class="view">
-            <div class="page-header">
-                <h1>Share Products & Earn</h1>
-                <p>Share product links with your friends and earn rewards on their purchases.</p>
-            </div>
-            <div id="earn-content-wrapper">
-                <!-- Content will be loaded by JS based on login status -->
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer Section -->
-    <footer>
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a><span>•</span>
-            <a href="#">Terms & Conditions</a><span>•</span>
-            <a href="#" id="earn-link">Share & Earn</a>
-        </div>
-        <p>© 2024 AtoZ Mobile. All Rights Reserved.</p>
-    </footer>
-
-    <!-- Authentication Modal with Login, Sign Up, Forgot Password -->
-    <div id="auth-modal" class="modal-overlay">
-        <div class="modal-container">
-            <!-- Login Form -->
-            <div id="login-form-container" class="modal-form active">
-                <h3>Login to Your Account</h3>
-                <form id="login-form">
-                    <div class="form-group"><label>Email</label><input type="email" id="login-email" class="form-input" required></div>
-                    <div class="form-group"><label>Password</label><input type="password" id="login-password" class="form-input" required></div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-                </form>
-                <p style="text-align:center; margin-top: 15px; font-size: 14px;">
-                    <a href="#" class="auth-link" data-target="forgot-form-container">Forgot Password?</a>
-                </p>
-                <hr style="margin: 20px 0; border:none; border-top: 1px solid var(--border-color);">
-                <p style="text-align:center; color: var(--text-muted);">
-                    Don't have an account? <a href="#" class="auth-link" data-target="signup-form-container">Create One</a>
-                </p>
-            </div>
-
-            <!-- Sign Up Form -->
-            <div id="signup-form-container" class="modal-form">
-                <h3>Create a New Account</h3>
-                <form id="signup-form">
-                    <div class="form-group"><label>Email</label><input type="email" id="signup-email" class="form-input" required></div>
-                    <div class="form-group"><label>Password (min. 6 characters)</label><input type="password" id="signup-password" class="form-input" required></div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
-                </form>
-                <hr style="margin: 20px 0; border:none; border-top: 1px solid var(--border-color);">
-                <p style="text-align:center; color: var(--text-muted);">
-                    Already have an account? <a href="#" class="auth-link" data-target="login-form-container">Login</a>
-                </p>
-            </div>
-
-            <!-- Forgot Password Form -->
-            <div id="forgot-form-container" class="modal-form">
-                <h3>Reset Password</h3>
-                <p style="color: var(--text-muted); margin: -5px 0 15px;">Enter your email and we'll send you a link to reset your password.</p>
-                <form id="forgot-form">
-                    <div class="form-group"><label>Email</label><input type="email" id="forgot-email" class="form-input" required></div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Reset Link</button>
-                </form>
-                 <hr style="margin: 20px 0; border:none; border-top: 1px solid var(--border-color);">
-                <p style="text-align:center; color: var(--text-muted);">
-                    Remembered your password? <a href="#" class="auth-link" data-target="login-form-container">Login</a>
-                </p>
-            </div>
-            <button class="header-btn" id="auth-modal-close" style="position:absolute; top:10px; right:10px;"><i class='bx bx-x'></i></button>
+        <!-- Section 2: Coming Soon Content (Hidden at start) -->
+        <div id="main-content">
+            <!-- Content is now in English -->
+            <h1 class="main-heading">Coming Soon</h1>
+            <p>Our website is under construction and we'll be live soon with something amazing.</p>
+            <p>Stay tuned!</p>
         </div>
     </div>
 
-    <!-- JavaScript Module -->
-    <script type="module">
-        // ### ZAROORI WARNING: SECURITY RISK! ###
-        // Aapke API keys yahan publically dikh rahe hain.
-        // Yeh production ke liye safe nahi hai. Apne Firebase Database Rules ko secure karein.
-        const firebaseConfig = {
-          apiKey: "AIzaSyBJVsgK-5lfNORLjPDf1k98z-DfzVy-BkQ",
-          authDomain: "r-commerce-31882.firebaseapp.com",
-          databaseURL: "https://r-commerce-31882-default-rtdb.firebaseio.com",
-          projectId: "r-commerce-31882",
-          storageBucket: "r-commerce-31882.firebasestorage.app",
-          messagingSenderId: "933291900578",
-          appId: "1:933291900578:web:73abc587657ef9a495a1fb",
-          measurementId: "G-HQ61F0YPLH"
+    <script>
+        window.onload = function() {
+            const loader = document.getElementById('loader-wrapper');
+            const content = document.getElementById('main-content');
+
+            // Set a delay (e.g., 2.5 seconds)
+            setTimeout(function() {
+                // Hide the loader
+                loader.style.display = 'none';
+
+                // Show the main content with a fade-in effect
+                content.style.display = 'block';
+                setTimeout(() => { 
+                    content.style.opacity = 1;
+                }, 10); // A tiny delay to ensure the display property is applied before opacity transition starts
+
+            }, 2500); // You can change this delay (e.g., 3000 for 3 seconds)
         };
-        
-        // --- Firebase Imports ---
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-        import { getDatabase, ref, onValue, get, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
-        
-        // --- Initialize Firebase ---
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const auth = getAuth(app);
-
-        // --- Global State & Constants ---
-        let allProducts = {};
-        let cart = [];
-        let siteContent = {};
-        let currentUserData = null; 
-        const WITHDRAWAL_LIMIT = 20000;
-        // [NAYA FEATURE] Product History ke liye
-        let productHistory = JSON.parse(localStorage.getItem('atoz_history')) || [];
-
-        // --- Utility Functions ---
-        const navigateTo = (viewId, param = null) => {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            const view = document.getElementById(viewId);
-            if (view) view.classList.add('active');
-            window.scrollTo(0, 0);
-            
-            let hash = `#${viewId}`;
-            if (param) hash += `/${param}`;
-            if (window.location.hash !== hash) {
-               history.pushState({ viewId, param }, '', hash);
-            }
-        };
-        const formatPrice = (price) => `₹${Number(price).toLocaleString('en-IN')}`;
-        const getYouTubeID = (url) => {
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : null;
-        };
-        const shuffleArray = (array) => {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        };
-
-        // [FIXED & IMPROVED] Share function ab mobile par native share bhi dega
-        const shareProduct = async (productId) => {
-            const user = auth.currentUser;
-            if (!user) {
-                alert("Please login to share and earn.");
-                document.getElementById('auth-modal').classList.add('active');
-                return;
-            }
-            const product = allProducts[productId];
-            if (!product) return;
-
-            const baseUrl = window.location.origin + window.location.pathname;
-            const referralLink = `${baseUrl}?ref=${user.uid}#product-detail-view/${productId}`;
-            
-            const shareData = {
-                title: `Check out ${product.name} on AtoZ Mobile!`,
-                text: `I found this amazing product: ${product.name}. Check it out here:`,
-                url: referralLink,
-            };
-
-            try {
-                // Yeh mobile par 'Share via' popup kholega
-                if (navigator.share) {
-                    await navigator.share(shareData);
-                } else {
-                    // Agar mobile share support nahi karta, toh link copy hoga
-                    await navigator.clipboard.writeText(referralLink);
-                    alert(`Link for "${product.name}" copied to clipboard! Share it to earn.`);
-                }
-            } catch (err) {
-                // Agar user share cancel kar de toh error na aaye
-                if (err.name !== 'AbortError') {
-                     console.error('Share failed:', err);
-                     alert('Could not share the product. Please copy the link manually.');
-                }
-            }
-        };
-
-        // [NAYA FEATURE] Product History ko manage karne ke liye functions
-        const addToHistory = (productId) => {
-            // Agar product pehle se history me hai to use hata do
-            productHistory = productHistory.filter(id => id !== productId);
-            // Naye product ko history me सबसे aage daalo
-            productHistory.unshift(productId);
-            // History ko 10 products tak limit karo
-            if (productHistory.length > 10) {
-                productHistory.pop();
-            }
-            // Updated history ko localStorage me save karo
-            localStorage.setItem('atoz_history', JSON.stringify(productHistory));
-            renderHistory();
-        };
-
-        const renderHistory = () => {
-            const container = document.getElementById('history-container');
-            if (!container) return;
-
-            // Agar history khali hai to container ko bhi khali kar do
-            if (productHistory.length === 0) {
-                container.innerHTML = ''; 
-                return;
-            }
-            
-            const historyProducts = productHistory
-                .map(id => allProducts[id] ? { id, ...allProducts[id] } : null)
-                .filter(p => p !== null);
-
-            if(historyProducts.length === 0) {
-                container.innerHTML = '';
-                return;
-            }
-
-            container.innerHTML = `
-                <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 20px;">Recently Viewed</h2>
-                <div id="shop-grid">
-                    ${historyProducts.map(p => `
-                        <a href="#" class="product-card" data-product-id="${p.id}">
-                            <img src="${p.coverImageUrl || 'https://via.placeholder.com/300'}" alt="${p.name}">
-                            <div class="product-card-body">
-                                <h3>${p.name}</h3>
-                                <p class="price">${formatPrice(p.basePrice)}</p>
-                            </div>
-                        </a>`).join('')}
-                </div>
-                <hr style="margin: 30px 0; border: none; border-top: 1px solid var(--border-color);">
-            `;
-        };
-
-        // --- Cart Logic ---
-        const loadCartFromStorage = () => { cart = JSON.parse(localStorage.getItem('atoz_cart')) || []; updateCartUI(); };
-        const saveCartToStorage = () => { localStorage.setItem('atoz_cart', JSON.stringify(cart)); updateCartUI(); };
-        const updateCartUI = () => {
-            document.getElementById('cart-item-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-            if (document.getElementById('cart-view').classList.contains('active')) renderCart();
-        };
-        const addToCart = (productId, variant, quantity = 1) => {
-            const product = allProducts[productId];
-            if (!product) return;
-            const existingItem = cart.find(item => item.id === productId && item.variant.color === variant.color);
-            if (existingItem) existingItem.quantity += quantity;
-            else cart.push({ id: productId, name: product.name, coverImageUrl: product.coverImageUrl, brand: product.brand, variant, price: variant.price, quantity });
-            saveCartToStorage();
-            alert(`${product.name} has been added to your cart!`);
-        };
-        const updateCartItemQuantity = (index, newQuantity) => {
-            if (newQuantity <= 0) {
-                cart.splice(index, 1);
-            } else {
-                cart[index].quantity = newQuantity;
-            }
-            saveCartToStorage();
-        };
-
-        // --- Render Functions ---
-        const renderShop = (productsToRender = null, shuffle = false) => {
-            const grid = document.getElementById('shop-grid');
-            if (!allProducts || Object.keys(allProducts).length === 0) {
-                grid.innerHTML = '<p>No products available at the moment.</p>';
-                return;
-            }
-            
-            let productsArray = productsToRender ? productsToRender : Object.keys(allProducts).map(id => ({ id, ...allProducts[id] }));
-
-            if (shuffle) {
-                productsArray = shuffleArray(productsArray);
-            } else {
-                productsArray.reverse();
-            }
-            
-            // [NAYA FEATURE] Recently viewed ko render karo
-            renderHistory();
-
-            if (productsArray.length === 0) {
-                grid.innerHTML = '<p>No products found matching your search.</p>';
-            } else {
-                grid.innerHTML = productsArray.map(p => `
-                    <a href="#" class="product-card" data-product-id="${p.id}">
-                        <img src="${p.coverImageUrl || 'https://via.placeholder.com/300'}" alt="${p.name}">
-                        <div class="product-card-body">
-                            <h3>${p.name}</h3>
-                            <p class="price">${formatPrice(p.basePrice)}</p>
-                        </div>
-                    </a>`).join('');
-            }
-        };
-
-        const renderProductDetails = async (productId) => {
-            const p = allProducts[productId];
-            if (!p) { navigateTo('shop-view'); return; }
-            
-            // [NAYA FEATURE] Product ko history me add karo
-            addToHistory(productId);
-            
-            document.getElementById('product-breadcrumb-name').textContent = p.name;
-            const container = document.getElementById('product-detail-content');
-            
-            const allImages = [p.coverImageUrl, ...(p.galleryImages ? Object.values(p.galleryImages) : [])].filter(Boolean);
-            
-            container.innerHTML = `
-                <div class="card" id="product-detail-container">
-                    <div class="product-images">
-                        <div class="image-slider">
-                            <div class="image-slider-track" style="transform: translateX(0%);">
-                                ${allImages.map(url => `<img src="${url}" alt="Product image for ${p.name}">`).join('')}
-                            </div>
-                            ${allImages.length > 1 ? `
-                                <button class="slider-btn prev"><i class='bx bx-chevron-left'></i></button>
-                                <button class="slider-btn next"><i class='bx bx-chevron-right'></i></button>
-                            ` : ''}
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="brand">${p.brand || 'Brand'}</div>
-                        <h1>${p.name}</h1>
-                        <p class="price" id="detail-price">${formatPrice(p.variants[0].price)}</p>
-                        <div class="variant-options">
-                            <label class="form-group-label">Select Color:</label>
-                            <div class="variant-radios">
-                                ${p.variants.map((v, i) => `<input type="radio" name="prod-variant" id="var-${i}" value="${i}" ${i===0?'checked':''} data-price="${v.price}"><label for="var-${i}" class="variant-label">${v.color}</label>`).join('')}
-                            </div>
-                        </div>
-                        <div class="product-actions">
-                            <button class="btn btn-primary" id="add-to-cart-btn"><i class='bx bxs-cart-add'></i> Add to Cart</button>
-                            <button class="btn btn-secondary" id="share-product-btn" data-product-id="${productId}"><i class='bx bx-share-alt'></i> Share</button>
-                        </div>
-                        ${p.specifications ? `<h3>Specifications</h3><table class="spec-table">${Object.entries(p.specifications).map(([key, value]) => `<tr><td>${key}</td><td>${value}</td></tr>`).join('')}</table>` : ''}
-                    </div>
-                </div>
-                ${p.description ? `<div class="card"><h3>Description</h3><p>${p.description.replace(/\n/g, '<br>')}</p></div>` : ''}
-                ${p.videoUrl ? `<div class="card"><h3>Product Video</h3><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${getYouTubeID(p.videoUrl)}" allowfullscreen></iframe></div></div>` : ''}
-                <div class="card" id="reviews-section"></div>`;
-            renderReviews(productId);
-        };
-
-        const renderReviews = async (productId) => {
-            const container = document.getElementById('reviews-section');
-            if(!container) return;
-            const user = auth.currentUser;
-            let reviewHTML = `<h3>Customer Reviews</h3>`;
-            const snapshot = await get(ref(db, `reviews/${productId}`));
-            const reviews = snapshot.val() || {};
-            const reviewsArray = Object.keys(reviews).map(id => ({ id, ...reviews[id] })).sort((a,b) => b.createdAt - a.createdAt);
-            
-            if (reviewsArray.length > 0) {
-                reviewHTML += reviewsArray.map(r => `
-                    <div class="review-card">
-                        <div class="review-header"><strong>${r.userName || 'Anonymous'}</strong><small>${new Date(r.createdAt).toLocaleDateString()}</small></div>
-                        <p>${r.comment}</p>
-                        ${r.reply ? `<div class="admin-reply"><strong>Admin Reply:</strong> ${r.reply.text}</div>` : ''}
-                    </div>`).join('');
-            } else {
-                reviewHTML += `<p style="margin-top:15px; color:var(--text-muted);">No reviews yet. Be the first to write one!</p>`;
-            }
-            
-            reviewHTML += `<hr style="margin: 25px 0; border:none; border-top: 1px solid var(--border-color);"><h4>Write a Review</h4>`;
-            if (user) {
-                reviewHTML += `<form id="review-form" style="margin-top:15px;">
-                    <div class="form-group"><textarea id="review-comment" class="form-textarea" placeholder="Share your thoughts..." required></textarea></div>
-                    <button type="submit" class="btn btn-primary">Submit Review</button>
-                </form>`;
-            } else {
-                reviewHTML += `<p style="margin-top:15px;">You must be <a href="#" class="auth-link" id="login-for-review-link">logged in</a> to write a review.</p>`;
-            }
-            container.innerHTML = reviewHTML;
-        };
-                
-        const renderCart = () => {
-            const container = document.getElementById('cart-content-wrapper');
-            if (cart.length === 0) {
-                container.innerHTML = '<div style="padding: 25px; text-align:center;"><i class="bx bx-cart" style="font-size: 50px; color: var(--text-muted);"></i><p style="margin-top: 10px;">Your cart is empty.</p></div>';
-                return;
-            }
-            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            container.innerHTML = `
-                <div id="cart-items-container">
-                    ${cart.map((item, index) => `
-                    <div class="cart-item">
-                        <img src="${item.coverImageUrl}" width="80" height="80" style="object-fit:cover; border-radius:8px;">
-                        <div style="flex-grow:1;">
-                            <h4>${item.name} (${item.variant.color})</h4>
-                            <p><strong>${formatPrice(item.price)}</strong></p>
-                            <div class="quantity-control">
-                                <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
-                                <span style="font-weight: 500; padding: 0 5px;">${item.quantity}</span>
-                                <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
-                            </div>
-                        </div>
-                        <div style="text-align:right;">
-                            <strong>${formatPrice(item.price * item.quantity)}</strong>
-                            <button class="header-btn remove-item-btn" data-index="${index}" title="Remove"><i class='bx bxs-trash'></i></button>
-                        </div>
-                    </div>`).join('')}
-                </div>
-                <div style="padding: 25px; background: var(--bg-color); border-top: 1px solid var(--border-color);">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-size: 1.2rem;">
-                        <span>Subtotal</span><strong>${formatPrice(subtotal)}</strong>
-                    </div>
-                    <button id="proceed-to-checkout-btn" class="btn btn-primary" style="width:100%;">Proceed to Checkout</button>
-                </div>`;
-        };
-
-        const renderCheckout = () => {
-            if (cart.length === 0) { navigateTo('cart-view'); return; }
-            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            const paymentMethods = siteContent.paymentMethods || {};
-            document.getElementById('checkout-container').innerHTML = `
-                <div>
-                    <div class="card" style="padding: 25px;">
-                        <h3>Shipping Details</h3>
-                        <div class="form-group"><label>Full Name</label><input type="text" id="customer-name" class="form-input" required></div>
-                        <div class="form-group"><label>Phone</label><input type="tel" id="customer-phone" class="form-input" required></div>
-                        <div class="form-group"><label>Address</label><input type="text" id="customer-address" class="form-input" required></div>
-                        <div class="form-group"><label>City</label><input type="text" id="customer-city" class="form-input" required></div>
-                        <div class="form-group"><label>State</label><input type="text" id="customer-state" class="form-input" required></div>
-                        <div class="form-group"><label>Pincode</label><input type="text" id="customer-pincode" class="form-input" required></div>
-                    </div>
-                    <div class="card" style="padding: 25px;">
-                         <h3>Payment Method</h3>
-                         <div class="payment-options">
-                            ${Object.entries(paymentMethods).map(([key, value]) => `
-                                <input type="radio" id="pay-${key.toLowerCase()}" name="paymentMethod" value="${value.name}" data-qr-url="${value.qrUrl}" required>
-                                <label for="pay-${key.toLowerCase()}"><img src="${value.iconUrl}" alt="${value.name}">${value.name}</label>
-                            `).join('')}
-                         </div>
-                         <div id="qr-code-display">
-                            <p>Scan the QR code below to pay</p>
-                            <img id="qr-image" src="" alt="Payment QR Code">
-                            <a id="qr-download-btn" href="#" class="btn" download="payment-qr.jpg" style="background: var(--hover-color);">Download QR</a>
-                         </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="card" style="padding: 25px; position: sticky; top: 80px;">
-                        <h3>Your Order</h3>
-                        ${cart.map(item => `<div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px;"><span>${item.name} (x${item.quantity})</span><span>${formatPrice(item.price*item.quantity)}</span></div>`).join('')}
-                        <hr style="margin:15px 0; border:none; border-top: 1px solid var(--border-color);">
-                        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size: 1.2rem;"><span>Total</span><span>${formatPrice(subtotal)}</span></div>
-                        <button type="submit" id="place-order-btn" class="btn btn-primary" style="width:100%; margin-top:20px;">Place Order</button>
-                    </div>
-                </div>`;
-        };
-        
-        const renderEarnPage = () => {
-            const container = document.getElementById('earn-content-wrapper');
-            const user = auth.currentUser;
-
-            if (user && currentUserData) {
-                const currentEarnings = currentUserData.earnings || 0;
-                const canWithdraw = currentEarnings >= WITHDRAWAL_LIMIT;
-                const productsArray = shuffleArray(Object.keys(allProducts).map(id => ({ id, ...allProducts[id] }))).slice(0, 5); // Sirf 5 random products dikhayein
-
-                container.innerHTML = `
-                    <div class="card">
-                        <div class="earnings-display">
-                            <div class="label">Your Total Earnings</div>
-                            <div class="amount">${formatPrice(currentEarnings)}</div>
-                        </div>
-                        
-                        <div style="margin-top: 30px;">
-                            <h3 style="text-align:center; margin-bottom: 20px;">Share These Products to Earn</h3>
-                            <div class="sharable-product-list">
-                                ${productsArray.length > 0 ? productsArray.map(p => `
-                                    <div class="sharable-product-item">
-                                        <img src="${p.coverImageUrl}" alt="${p.name}">
-                                        <div class="sharable-product-item-info">
-                                            <h4>${p.name}</h4>
-                                            <span>${formatPrice(p.basePrice)}</span>
-                                        </div>
-                                        <button class="btn btn-secondary share-product-list-btn" data-product-id="${p.id}"><i class='bx bx-share-alt'></i> Share</button>
-                                    </div>
-                                `).join('') : '<p>No products available to share.</p>'}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Withdraw Your Earnings</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 20px;">
-                            You can request a withdrawal once your earnings reach ${formatPrice(WITHDRAWAL_LIMIT)}.
-                        </p>
-                        <form id="withdraw-form">
-                            <div class="form-group">
-                                <label for="bank-name">Bank Name</label>
-                                <input type="text" id="bank-name" class="form-input" required ${!canWithdraw ? 'disabled' : ''}>
-                            </div>
-                            <div class="form-group">
-                                <label for="account-number">Bank Account Number</label>
-                                <input type="text" id="account-number" class="form-input" required ${!canWithdraw ? 'disabled' : ''}>
-                            </div>
-                            <div class="form-group">
-                                <label for="mobile-number">Registered Mobile Number</label>
-                                <input type="tel" id="mobile-number" class="form-input" required ${!canWithdraw ? 'disabled' : ''}>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="width:100%" ${!canWithdraw ? 'disabled' : ''}>
-                                Request Withdrawal of ${formatPrice(currentEarnings)}
-                            </button>
-                        </form>
-                    </div>
-                `;
-            } else {
-                container.innerHTML = `
-                    <div class="card" style="text-align:center; padding: 40px;">
-                        <h3>View Your Earnings</h3>
-                        <p style="color: var(--text-muted); margin-top: 10px; margin-bottom: 20px;">Please log in or create an account to see your earnings and share products.</p>
-                        <button class="btn btn-primary" id="login-for-earn">Login or Create Account</button>
-                    </div>
-                `;
-            }
-        };
-
-        // --- Event Delegation & Handlers ---
-        let currentImageIndex = 0;
-
-        document.body.addEventListener('click', e => {
-            // Navigation
-            if (e.target.closest('.home-link')) { e.preventDefault(); navigateTo('shop-view'); }
-            if (e.target.closest('.product-card')) { e.preventDefault(); currentImageIndex = 0; navigateTo('product-detail-view', e.target.closest('.product-card').dataset.productId); }
-            if (e.target.closest('#cart-button')) { navigateTo('cart-view'); }
-            if (e.target.closest('#proceed-to-checkout-btn')) { navigateTo('checkout-view'); }
-            if (e.target.closest('#earn-link')) { e.preventDefault(); navigateTo('earn-view'); }
-            if (e.target.closest('#login-for-review-link') || e.target.closest('#login-for-earn')) { e.preventDefault(); document.getElementById('auth-modal').classList.add('active'); }
-            
-            // Auth Modal
-            if (e.target.closest('#login-btn')) { document.getElementById('auth-modal').classList.add('active'); }
-            if (e.target.closest('#logout-btn')) { signOut(auth).catch(err => alert(err.message)); }
-            if (e.target.closest('#auth-modal-close')) { document.getElementById('auth-modal').classList.remove('active'); }
-            if (e.target.classList.contains('auth-link')) {
-                e.preventDefault();
-                const targetId = e.target.dataset.target;
-                document.querySelectorAll('.modal-form').forEach(form => form.classList.remove('active'));
-                document.getElementById(targetId).classList.add('active');
-            }
-            
-            // Cart Actions
-            if (e.target.closest('#add-to-cart-btn')) {
-                const pId = history.state.param;
-                const vIndex = document.querySelector('input[name="prod-variant"]:checked').value;
-                addToCart(pId, allProducts[pId].variants[vIndex]);
-            }
-            if (e.target.closest('.quantity-btn')) {
-                const btn = e.target.closest('.quantity-btn');
-                const index = btn.dataset.index;
-                const action = btn.dataset.action;
-                const currentQuantity = cart[index].quantity;
-                const newQuantity = action === 'increase' ? currentQuantity + 1 : currentQuantity - 1;
-                updateCartItemQuantity(index, newQuantity);
-            }
-            if (e.target.closest('.remove-item-btn')) {
-                const index = e.target.closest('.remove-item-btn').dataset.index;
-                if(confirm("Are you sure you want to remove this item?")) {
-                    cart.splice(index, 1);
-                    saveCartToStorage();
-                }
-            }
-
-            // Image Slider Logic
-            if (e.target.closest('.slider-btn')) {
-                const btn = e.target.closest('.slider-btn');
-                const track = document.querySelector('.image-slider-track');
-                if(!track) return;
-                const totalImages = track.children.length;
-                if(totalImages <= 1) return;
-
-                if (btn.classList.contains('next')) { currentImageIndex = (currentImageIndex + 1) % totalImages; } 
-                else if (btn.classList.contains('prev')) { currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages; }
-                track.style.transform = `translateX(-${currentImageIndex * 100}%)`;
-            }
-
-            // [FIXED & IMPROVED] Share button clicks ke liye event delegation
-            if (e.target.closest('#share-product-btn')) {
-                shareProduct(e.target.closest('#share-product-btn').dataset.productId);
-            }
-            if (e.target.closest('.share-product-list-btn')) {
-                shareProduct(e.target.closest('.share-product-list-btn').dataset.productId);
-            }
-        });
-        
-        document.addEventListener('keyup', e => {
-            if (e.target.id === 'product-search-input') {
-                const searchTerm = e.target.value.toLowerCase().trim();
-                const allProductsArray = Object.keys(allProducts).map(id => ({ id, ...allProducts[id] }));
-
-                if (searchTerm.length > 1) {
-                    const filteredProducts = allProductsArray.filter(p => 
-                        p.name.toLowerCase().includes(searchTerm) || 
-                        (p.brand && p.brand.toLowerCase().includes(searchTerm))
-                    );
-                    renderShop(filteredProducts, false); // Filtered products ko render karein, shuffle nahi
-                } else {
-                    renderShop(null, true); // Search khali hone par wapas sab products (shuffled) dikhayein
-                }
-            }
-        });
-
-        document.addEventListener('change', e => {
-            if (e.target.name === 'prod-variant') { document.getElementById('detail-price').textContent = formatPrice(e.target.dataset.price); }
-            if (e.target.name === 'paymentMethod') {
-                const qrUrl = e.target.dataset.qrUrl;
-                const qrDisplay = document.getElementById('qr-code-display');
-                if (qrUrl && qrUrl !== 'undefined') {
-                    document.getElementById('qr-image').src = qrUrl;
-                    document.getElementById('qr-download-btn').href = qrUrl;
-                    qrDisplay.style.display = 'block';
-                } else {
-                    qrDisplay.style.display = 'none';
-                }
-            }
-        });
-
-        // --- Form Submissions ---
-        document.addEventListener('submit', async e => {
-            e.preventDefault();
-            const submitButton = e.target.querySelector('button[type="submit"]');
-            if (submitButton) submitButton.disabled = true;
-
-            try {
-                if (e.target.id === 'review-form') { /* Your review submission logic here */ }
-                
-                else if (e.target.id === 'checkout-form') {
-                    if(cart.length === 0) throw new Error("Your cart is empty.");
-                    const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
-                    if (!selectedPayment) throw new Error("Please select a payment method.");
-                    
-                    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-                    const orderData = { 
-                        customerDetails: {
-                            name: document.getElementById('customer-name').value,
-                            phone: document.getElementById('customer-phone').value,
-                            address: document.getElementById('customer-address').value,
-                            city: document.getElementById('customer-city').value,
-                            state: document.getElementById('customer-state').value,
-                            pincode: document.getElementById('customer-pincode').value,
-                        },
-                        paymentMethod: selectedPayment.value,
-                        totalAmount: subtotal,
-                        items: cart,
-                        status: 'Pending',
-                        createdAt: serverTimestamp(),
-                    };
-
-                    const referralUserId = sessionStorage.getItem('referralUserId');
-                    if (referralUserId) {
-                        orderData.referralUserId = referralUserId;
-                    }
-
-                    const orderRef = push(ref(db, 'orders'));
-                    await set(orderRef, orderData);
-                    document.getElementById('success-order-id').textContent = orderRef.key;
-                    
-                    cart = [];
-                    saveCartToStorage();
-                    sessionStorage.removeItem('referralUserId');
-                    navigateTo('order-success-view');
-                }
-
-                else if (e.target.id === 'login-form') {
-                    const email = document.getElementById('login-email').value;
-                    const password = document.getElementById('login-password').value;
-                    await signInWithEmailAndPassword(auth, email, password);
-                    document.getElementById('auth-modal').classList.remove('active');
-                }
-
-                else if (e.target.id === 'signup-form') {
-                     const email = document.getElementById('signup-email').value;
-                     const password = document.getElementById('signup-password').value;
-                     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                     await set(ref(db, 'userProfile/' + userCredential.user.uid), {
-                         email: userCredential.user.email,
-                         createdAt: serverTimestamp(),
-                         earnings: 0
-                     });
-                     document.getElementById('auth-modal').classList.remove('active');
-                     alert("Account created successfully!");
-                }
-
-                else if (e.target.id === 'forgot-form') {
-                    const email = document.getElementById('forgot-email').value;
-                    await sendPasswordResetEmail(auth, email);
-                    alert("Password reset email sent! Please check your inbox.");
-                    document.querySelectorAll('.modal-form').forEach(form => form.classList.remove('active'));
-                    document.getElementById('login-form-container').classList.add('active');
-                }
-
-                else if (e.target.id === 'withdraw-form') {
-                    if (!auth.currentUser || !currentUserData) throw new Error("You must be logged in!");
-                    const withdrawalData = {
-                        bankName: document.getElementById('bank-name').value,
-                        accountNumber: document.getElementById('account-number').value,
-                        mobileNumber: document.getElementById('mobile-number').value,
-                        amount: currentUserData.earnings,
-                        userId: auth.currentUser.uid,
-                        status: 'Pending',
-                        requestedAt: serverTimestamp()
-                    };
-                    await push(ref(db, 'withdrawals'), withdrawalData);
-                    alert("Withdrawal request submitted! It will be processed soon.");
-                    e.target.reset();
-                }
-            } catch (error) {
-                alert("Operation Failed: " + error.message);
-            } finally {
-                 if (submitButton) submitButton.disabled = false;
-            }
-        });
-
-        // --- Authentication & User Data Logic ---
-        onAuthStateChanged(auth, user => {
-            const authContainer = document.getElementById('user-auth-section');
-            if (user) {
-                authContainer.innerHTML = `<button class="btn" id="logout-btn" style="padding: 8px 15px; background-color: var(--hover-color);">Logout</button>`;
-                const userRef = ref(db, 'userProfile/' + user.uid);
-                onValue(userRef, (snapshot) => {
-                    currentUserData = snapshot.val();
-                    if (document.getElementById('earn-view').classList.contains('active')) {
-                        renderEarnPage();
-                    }
-                });
-            } else {
-                authContainer.innerHTML = `<button class="btn btn-primary" id="login-btn" style="padding: 8px 15px;">Login</button>`;
-                currentUserData = null;
-                if (document.getElementById('earn-view').classList.contains('active')) {
-                    renderEarnPage();
-                }
-            }
-            if (history.state?.viewId === 'product-detail-view') renderReviews(history.state.param);
-        });
-
-        // --- Page Initialization & Routing ---
-        const handleRouteChange = () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const refCode = urlParams.get('ref');
-            if (refCode) {
-                sessionStorage.setItem('referralUserId', refCode);
-                history.replaceState(null, '', window.location.pathname + window.location.hash);
-            }
-
-            const hash = window.location.hash.slice(1);
-            const [viewId, param] = hash.split('/');
-            navigateTo(viewId || 'shop-view', param);
-        };
-
-        const setupViewObservers = () => {
-            const observer = new MutationObserver((mutations) => {
-                for (const mutation of mutations) {
-                    if (mutation.attributeName === 'class' && mutation.target.classList.contains('active')) {
-                        const viewId = mutation.target.id;
-                        const param = history.state?.param;
-                        if (viewId === 'shop-view') { renderShop(null, true); }
-                        else if (viewId === 'product-detail-view' && param) { currentImageIndex = 0; renderProductDetails(param); }
-                        else if (viewId === 'cart-view') renderCart();
-                        else if (viewId === 'checkout-view') renderCheckout();
-                        else if (viewId === 'earn-view') renderEarnPage();
-                    }
-                }
-            });
-            document.querySelectorAll('.view').forEach(view => observer.observe(view, { attributes: true }));
-        };
-
-        const init = () => {
-            loadCartFromStorage();
-            
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = themeToggle.querySelector('i');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            let currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
-
-            const applyTheme = (theme) => {
-                document.documentElement.setAttribute('data-theme', theme);
-                themeIcon.className = theme === 'dark' ? 'bx bx-moon' : 'bx bx-sun';
-            };
-
-            themeToggle.addEventListener('click', () => {
-                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-                localStorage.setItem('theme', currentTheme);
-                applyTheme(currentTheme);
-            });
-            applyTheme(currentTheme);
-            
-            onValue(ref(db), (snapshot) => {
-                const data = snapshot.val() || {};
-                allProducts = data.products || {};
-                siteContent = data.siteContent || {};
-
-                if (!siteContent.paymentMethods) {
-                    siteContent.paymentMethods = {
-                        "eSewa": { name: "eSewa", iconUrl: "https://iili.io/FBwORWl.jpg", qrUrl: "https://i.ibb.co/L9jQz3q/sample-qr.png" },
-                        "Khalti": { name: "Khalti", iconUrl: "https://iili.io/FBwkKFI.png", qrUrl: "https://i.ibb.co/L9jQz3q/sample-qr.png" }
-                    };
-                }
-
-                const activeViewId = document.querySelector('.view.active')?.id;
-                if (activeViewId === 'shop-view') {
-                    renderShop(null, true);
-                } else if (activeViewId === 'earn-view') {
-                    renderEarnPage();
-                } else if (activeViewId === 'product-detail-view' && history.state?.param) {
-                    // [NAYA FEATURE] Agar product page par hain to history update karne ke liye
-                    renderHistory();
-                }
-            });
-            
-            window.addEventListener('popstate', (event) => { if(event.state) { navigateTo(event.state.viewId, event.state.param); } });
-            setupViewObservers();
-            handleRouteChange();
-        };
-        
-        init();
     </script>
+
 </body>
 </html>
